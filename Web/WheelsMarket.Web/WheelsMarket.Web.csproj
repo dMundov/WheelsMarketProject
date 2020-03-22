@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>aspnet-WheelsMarket-BBB373B5-EF3F-4DBB-B8AA-7152CEC275BF</UserSecretsId>
+	<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.0.96" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\WheelsMarket.Data.Models\WheelsMarket.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\WheelsMarket.Data\WheelsMarket.Data.csproj" />
+    <ProjectReference Include="..\..\Services\WheelsMarket.Services.Data\WheelsMarket.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\WheelsMarket.Services.Mapping\WheelsMarket.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\WheelsMarket.Services.Messaging\WheelsMarket.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\WheelsMarket.Services\WheelsMarket.Services.csproj" />
+    <ProjectReference Include="..\WheelsMarket.Web.Infrastructure\WheelsMarket.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\WheelsMarket.Web.ViewModels\WheelsMarket.Web.ViewModels.csproj" />
+  </ItemGroup>
+</Project>
