@@ -1,0 +1,18 @@
+﻿@using WheelsMarket.Common
+@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<div id="ws-widget-097908"></div>
+
+@*<script src="//services.wheel-size.com/code/ws-widget.js"></script>*@
+<script>
+    var widget = WheelSizeWidgets.create('#ws-widget-097908', {
+        uuid: '097908f6fa234c35918f01c96a262120',
+        type: 'calc'
+    });
+</script>
