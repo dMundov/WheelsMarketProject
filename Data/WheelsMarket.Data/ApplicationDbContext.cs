@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Data
+﻿using WheelsMarket.Data.Models.Enums;
+
+namespace WheelsMarket.Data
 {
     using System;
     using System.Linq;
@@ -25,6 +27,10 @@
         }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Ad> Ads { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 
@@ -72,6 +78,12 @@
             {
                 foreignKey.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            builder
+                .Entity<Ad>()
+                .Property(p => p.RimType)
+                .HasConversion(
+                    v => v.ToString(), v => (RimType) Enum.Parse(typeof(RimType), v));
         }
 
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)

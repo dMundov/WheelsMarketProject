@@ -45,15 +45,15 @@
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Полето е задължително!")]
+            [EmailAddress(ErrorMessage = "Моля въведете валиден e-mail адрес !")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Полето е задължително!")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Запомни ме?")]
             public bool RememberMe { get; set; }
         }
 

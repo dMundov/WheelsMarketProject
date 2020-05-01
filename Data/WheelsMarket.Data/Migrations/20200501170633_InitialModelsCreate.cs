@@ -1,10 +1,9 @@
-﻿namespace WheelsMarket.Data.Migrations
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace WheelsMarket.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    public partial class InitialCreate : Migration
+    public partial class InitialModelsCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +18,7 @@
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,7 +47,7 @@
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    DeletedOn = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,7 +65,7 @@
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,7 +80,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,6 +94,38 @@
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ads",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    BoltsNumber = table.Column<short>(nullable: false),
+                    InterBoltDistance = table.Column<int>(nullable: false),
+                    Width = table.Column<double>(nullable: false),
+                    Diameter = table.Column<int>(nullable: false),
+                    Offset = table.Column<short>(nullable: false),
+                    CenterBore = table.Column<double>(nullable: false),
+                    BoltPattern = table.Column<string>(nullable: false),
+                    RimType = table.Column<string>(nullable: false),
+                    MainPicture = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ads", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ads_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -102,7 +133,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -122,7 +153,7 @@
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,7 +171,7 @@
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,7 +197,7 @@
                     UserId = table.Column<string>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,6 +209,55 @@
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    AdId = table.Column<int>(nullable: false),
+                    AdId1 = table.Column<string>(nullable: true),
+                    ParentId = table.Column<int>(nullable: true),
+                    Content = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Ads_AdId1",
+                        column: x => x.AdId1,
+                        principalTable: "Ads",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_Comments_ParentId",
+                        column: x => x.ParentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ads_IsDeleted",
+                table: "Ads",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ads_UserId",
+                table: "Ads",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -229,6 +309,26 @@
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comments_AdId1",
+                table: "Comments",
+                column: "AdId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_IsDeleted",
+                table: "Comments",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_ParentId",
+                table: "Comments",
+                column: "ParentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Settings_IsDeleted",
                 table: "Settings",
                 column: "IsDeleted");
@@ -252,10 +352,16 @@
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Comments");
+
+            migrationBuilder.DropTable(
                 name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Ads");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
