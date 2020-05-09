@@ -1816,11 +1816,10 @@ a.btn-hh-trigger.target-open:after {
 }
 .navbar-slogan {
   float: left;
-  width: 180px;
-  padding-left: 1.5em;
+    padding-left: 1.5em;
   margin-left: 1.5em;
   border-left: 2px dotted #bcbfc4;
-  font-size: 13px;
+  font-size: 20px;
   line-height: 1.2;
   color: #bcbfc4;
   display: none;
