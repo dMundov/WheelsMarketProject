@@ -78,3 +78,33 @@ function closeAllSelect(elmnt) {
 /*if the user clicks anywhere outside the select box,
 then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
+
+/*----file uploader-----*/
+
+$(document).ready(function () {
+
+    // input plugin
+    bsCustomFileInput.init();
+
+    // get file and preview image
+    $("#inputGroupFile").on('change', function () {
+        var input = $(this)[0];
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#preview').attr('src', e.target.result).fadeIn('slow');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    })
+
+})
+
+
+var loadFile = function (event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function () {
+        URL.revokeObjectURL(output.src) // free memory
+    }
+};

@@ -9,9 +9,9 @@ using WheelsMarket.Services.Mapping;
 
 namespace WheelsMarket.Web.ViewModels.AdViewModels
 {
-    public class CreateAdInputModel  : IMapTo<Ad>
+    public class CreateAdInputModel : IMapTo<Ad>
     {
-        
+
         [Required]
         public short BoltsNumber { get; set; }
 
@@ -24,18 +24,16 @@ namespace WheelsMarket.Web.ViewModels.AdViewModels
         [Required]
         public int Diameter { get; set; }
 
-        public short Offset { get; set; }
+        [Required]
+        public double Offset { get; set; }
 
         [Required]
         public double CenterBore { get; set; }
 
         [Required]
-        public string BoltPattern { get; set; }
-
-        [Required]
         public RimType RimType { get; set; }
 
-        [Required]
+        
         public string MainPicture { get; set; }
 
     }

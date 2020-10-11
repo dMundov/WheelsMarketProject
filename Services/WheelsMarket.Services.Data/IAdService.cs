@@ -8,7 +8,7 @@ namespace WheelsMarket.Services.Data
 {
     public interface IAdService
     {
-        Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, short offset, double centerBore, string mainPicture, RimType rimType);
+        Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType, string userId);
 
         T GetById<T>(string id);
 

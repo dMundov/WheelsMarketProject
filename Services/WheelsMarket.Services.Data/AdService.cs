@@ -19,10 +19,12 @@ namespace WheelsMarket.Services.Data
             this.adRepository = adRepository;
         }
 
-        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, short offset, double centerBore,string mainPicture, RimType rimType)
+        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore,string mainPicture, RimType rimType, string userId)
         {
             Ad ad = new Ad
             {
+                Title = "Джанти " +boltsNumber+"x"+interBoltDistance,
+                BoltPattern = boltsNumber+"x"+interBoltDistance,
                 BoltsNumber = boltsNumber,
                 InterBoltDistance = interBoltDistance,
                 Diameter = diameter,
@@ -31,6 +33,7 @@ namespace WheelsMarket.Services.Data
                 Width = width,
                 MainPicture = mainPicture,
                 RimType = rimType,
+                UserId = userId
             };
 
             await this.adRepository.AddAsync(ad);

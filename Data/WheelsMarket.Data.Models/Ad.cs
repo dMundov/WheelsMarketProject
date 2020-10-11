@@ -13,9 +13,6 @@ namespace WheelsMarket.Data.Models
         public Ad()
         {
             this.Id = Guid.NewGuid().ToString();
-            this.Title = $"Джанти {this.Diameter} {this.Width}";
-            this.BoltPattern = $"{this.BoltsNumber}x{InterBoltDistance}";
-            this.Comments = new HashSet<Comment>();
         }
 
         [Required]
@@ -33,7 +30,8 @@ namespace WheelsMarket.Data.Models
         [Required]
         public int Diameter { get; set; }
 
-        public short Offset { get; set; }
+        [Required]
+        public double Offset { get; set; }
 
         [Required]
         public double CenterBore { get; set; }
@@ -44,7 +42,7 @@ namespace WheelsMarket.Data.Models
         [Required]
         public RimType RimType { get; set; }
 
-        [Required]
+        
         public string MainPicture { get; set; }
 
         [Required]
@@ -52,7 +50,7 @@ namespace WheelsMarket.Data.Models
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
 
     }
 }
