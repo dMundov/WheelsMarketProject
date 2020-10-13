@@ -12,5 +12,7 @@ namespace WheelsMarket.Services.Data
 
         T GetById<T>(string id);
 
+        IEnumerable<T> GetLast10Ads<T>();
+
     }
 }

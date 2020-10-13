@@ -17,9 +17,9 @@
                 <div class="row">
                     <div class="col-md-auto">
                         <label>Диаметър</label>
-                        <select class="form-control form-control-sm" id="diameter" asp-for="Diameter">
+                        <select class="form-control form-control-sm" id="diameter" asp-for="Diameter" required="">
                             <option selected="">Избери</option>
-                            <option value="8">8</option>
+                            <option value="8">8"</option>
                             <option value="13">13"</option>
                             <option value="14">14"</option>
                             <option value="15">15"</option>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label>Бр.Болтове</label>
-                        <select class="form-control form-control-sm" id="boltsCount" asp-for="BoltsNumber">
+                        <select class="form-control form-control-sm" id="boltsCount" asp-for="BoltsNumber" required="">
                             <option selected="">Избери</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label>Офсет</label>
-                        <select class="form-control form-control-sm" id="ofset(ET)" asp-for="Offset">
+                        <select class="form-control form-control-sm" id="ofset(ET)" asp-for="Offset" required="">
                             <option value="">Избери</option>
                             <option value="-35">-35</option>
                             <option value="-32">-32</option>
@@ -197,7 +197,7 @@
                 <div class="row">
                     <div class="col-md-auto">
                         <label>Болт.Разстояние</label>
-                        <select class="form-control form-control-sm" id="rim_psd" asp-for="InterBoltDistance">
+                        <select class="form-control form-control-sm" id="rim_psd" asp-for="InterBoltDistance" required="">
                             <option selected="">Избери</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -207,7 +207,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label>Центр.Отвор</label>
-                        <select class="form-control form-control-sm" id="centralOpening" asp-for="CenterBore">
+                        <select class="form-control form-control-sm" id="centralOpening" asp-for="CenterBore" required="">
                             <option value="" selected="selected">Избери</option>
                             <option value="100">100</option>
                             <option value="100.1">100.1</option>
@@ -309,7 +309,7 @@
                     </div>
                     <div class="col-md-auto">
                         <label>Ширина</label>
-                        <select select class="form-control form-control-sm" id="width" asp-for="Width">
+                        <select select class="form-control form-control-sm" id="width" asp-for="Width" required="">
                             <option value="">Избери</option>
                             <option value="2.5">2.5</option>
                             <option value="3.5">3.5</option>

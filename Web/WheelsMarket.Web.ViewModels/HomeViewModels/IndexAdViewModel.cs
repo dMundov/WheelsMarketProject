@@ -1,15 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Data.Models.Enums;
-using WheelsMarket.Services.Mapping;
-using WheelsMarket.Web.ViewModels.HomeViewModels;
-
-namespace WheelsMarket.Web.ViewModels.AdViewModels
+﻿namespace WheelsMarket.Web.ViewModels.HomeViewModels
 {
-    public class AdViewModel:IMapFrom<Ad>
-    {
+    using WheelsMarket.Data.Models;
+    using WheelsMarket.Data.Models.Enums;
+    using WheelsMarket.Services.Mapping;
 
+    public class IndexAdViewModel : IMapFrom<Ad>
+    {
         public string Title { get; set; }
 
         public short BoltsNumber { get; set; }

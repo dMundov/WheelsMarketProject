@@ -1,5 +1,12 @@
-﻿namespace WheelsMarket.Web.Controllers
+﻿
+namespace WheelsMarket.Web.Controllers
 {
+    using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Logging;
+
+
+    using WheelsMarket.Services.Data;
+    using WheelsMarket.Web.ViewModels.HomeViewModels;
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
@@ -7,9 +14,29 @@
 
     public class HomeController : BaseController
     {
+        private readonly IAdService adService;
+        private readonly ILogger<HomeController> logger;
+        private readonly IDistributedCache distributedCache;
+
+        public HomeController(
+            IAdService adService,
+            ILogger<HomeController> logger,
+            IDistributedCache distributedCache)
+        {
+            this.adService = adService;
+            this.logger = logger;
+            this.distributedCache = distributedCache;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new IndexViewModel
+            {
+                Ads =
+                    this.adService.GetLast10Ads<IndexAdViewModel>()
+            };
+            return this.View(viewModel);
+
         }
 
         public IActionResult Privacy()

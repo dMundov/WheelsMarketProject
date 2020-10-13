@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Threading;
-using WheelsMarket.Data.Common.Models;
-using WheelsMarket.Data.Models.Enums;
-
+﻿
 namespace WheelsMarket.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+   
+    using WheelsMarket.Data.Common.Models;
+    using WheelsMarket.Data.Models.Enums;
+
     public class Ad : BaseDeletableModel<string>
     {
         public Ad()
@@ -42,7 +42,7 @@ namespace WheelsMarket.Data.Models
         [Required]
         public RimType RimType { get; set; }
 
-        
+
         public string MainPicture { get; set; }
 
         [Required]

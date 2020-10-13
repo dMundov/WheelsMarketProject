@@ -138,11 +138,12 @@ body {
     float: right;
 }
 .frame {
-    width: 440px;
-    height: 350px;
+    
+    width: auto;
+    height: auto;
 }
 
-img {
+#output {
     width: 100%;
     height: 100%;
 }

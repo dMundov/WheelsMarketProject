@@ -1,4 +1,6 @@
-﻿@{
+﻿@using WheelsMarket.Data.Models
+@model WheelsMarket.Web.ViewModels.HomeViewModels.IndexViewModel
+@{
     this.ViewData["Title"] = "Home Page";
 }
 <div class="hero" id="highlighted">
@@ -415,26 +417,27 @@
                 sit amet mauris.
             </p>
             <div class="item-carousel" data-toggle="owlcarousel" data-owlcarousel-settings='{"items":6, "pagination":false, "navigation":true, "itemsScaleUp":true}'>
-                <div class="item">
-                    <a href="#" class="overlay-wrapper">
-                        <img src="img/showcase/project1.png" alt="Project 1 image" class="img-responsive underlay">
-                        <span class="overlay">
-                            <span class="overlay-content"> <span class="h4">Project 1</span> </span>
-                        </span>
-                    </a>
-                    <div class="item-details bg-noise">
-                        <h4 class="item-title">
-                            <a href="#">Project 1</a>
-                        </h4>
-                        <p>
-                            jsdhgfsljdhg
-                            dsgdsgojs;od
-                            sdgs
-
-                        </p>
-                        <a href="#" class="btn btn-more"><i class="fa fa-plus"></i>Виж обявата</a>
+                @foreach (var ad in Model.Ads)
+                {
+                    
+                    <div class="item">
+                        <a href="" class="overlay-wrapper">
+                            <img src="@ad.MainPicture" alt="Project 1 image" class="img-responsive underlay">
+                            <span class="overlay">
+                                <span class="overlay-content"> <span class="h4">@ad.Title</span> </span>
+                            </span>
+                        </a>
+                        <div class="item-details bg-noise">
+                            <h4 class="item-title">
+                                <a href="#">@ad.Title</a>
+                            </h4>
+                            <p>
+                                jsdhgfsljdhg
+                            </p>
+                            <a href="#" class="btn btn-more"><i class="fa fa-plus"></i>Виж обявата</a>
+                        </div>
                     </div>
-                </div>
+                }
                 <div class="item">
                     <a href="#" class="overlay-wrapper">
                         <img src="img/showcase/project2.png" alt="Project 2 image" class="img-responsive underlay">
