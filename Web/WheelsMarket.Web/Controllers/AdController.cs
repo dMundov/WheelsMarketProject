@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using WheelsMarket.Data.Common.Models;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Services.Data;
@@ -31,10 +34,11 @@ namespace WheelsMarket.Web.Controllers
 
         }
 
-        
+
         public IActionResult ById(string id)
         {
-            var adViewModel = this.adService.GetById<AdViewModel>(id);
+
+            AdViewModel adViewModel = this.adService.GetById<AdViewModel>(id);
             if (adViewModel == null)
             {
                 return this.NotFound();
@@ -42,7 +46,7 @@ namespace WheelsMarket.Web.Controllers
 
             return this.View(adViewModel);
         }
-        
+
 
         [Authorize]
         public IActionResult Create()
@@ -54,28 +58,29 @@ namespace WheelsMarket.Web.Controllers
         [Authorize]
         public async Task<IActionResult> Create(CreateAdInputModel input)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-            
+            ApplicationUser user = await this.userManager.GetUserAsync(this.User);
+
 
 
             string webRootPath = environment.WebRootPath;
-            IFormFileCollection files = HttpContext.Request.Form.Files;
+            IFormFileCollection file = HttpContext.Request.Form.Files;
 
-            if (files.Count != 0)
+            if (file.Count != 0)
             {
-                var uploads = Path.Combine(webRootPath, @"images");
-                var extension = Path.GetExtension(files[0].FileName);
+                string uploads = Path.Combine(webRootPath, @"images");
+                string extension = Path.GetExtension(file[0].FileName);
 
-                using (var fileStrem = new FileStream(Path.Combine(uploads, user.Id + extension), FileMode.Create))
-                {
-                    files[0].CopyTo(fileStrem);
-                }
+                //resize and save uploading  image
+                using var image = Image.Load(file[0].OpenReadStream());
+                image.Mutate(x => x.Resize(500, 500));
+                image.Save(Path.Combine(uploads, user.Id + file[0].FileName));
 
-                input.MainPicture = @"\" + @"images" + @"\" + user.Id + extension;
+
+                input.MainPicture = @"\" + @"images" + @"\" + user.Id + file[0].FileName;
             }
             else
             {
-                input.MainPicture = @"\" + @"images" + @"\" + user.Id + "-default_image.png";
+                input.MainPicture = @"\" + @"images" + @"\" + "-default_image.png";
 
             }
             if (!this.ModelState.IsValid)
@@ -83,10 +88,34 @@ namespace WheelsMarket.Web.Controllers
                 return this.View(input);
             }
 
-            var adId = await this.adService.CreateAdAsync(input.BoltsNumber,input.InterBoltDistance,input.Width,input.Diameter,input.Offset,input.CenterBore,input.MainPicture,input.RimType,user.Id);
+            string adId = await this.adService.CreateAdAsync(
+                  input.BoltsNumber
+                , input.InterBoltDistance
+                , input.Width
+                , input.Diameter
+                , input.Offset
+                , input.CenterBore
+                , input.MainPicture
+                , input.RimType
+                , user.Id);
             this.TempData["InfoMessage"] = "Ad has created!";
             return this.RedirectToAction(nameof(this.ById), new { id = adId });
 
+        }
+
+        [Authorize]
+        public async Task<IActionResult> GetAllAdsByUser(string userId)
+        {
+
+            ApplicationUser user = await this.userManager.GetUserAsync(this.User);
+
+            ListUserAdsViewModel allAdsForUser =
+                new ListUserAdsViewModel
+                {
+                    AllAds = this.adService.GetAllAdsByUser<AdViewModel>(user.Id)
+                };
+            
+            return this.View(allAdsForUser);
         }
 
 

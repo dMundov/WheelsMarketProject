@@ -6,6 +6,8 @@
 
     public class IndexAdViewModel : IMapFrom<Ad>
     {
+        public string Id { get; set; }
+
         public string Title { get; set; }
 
         public short BoltsNumber { get; set; }

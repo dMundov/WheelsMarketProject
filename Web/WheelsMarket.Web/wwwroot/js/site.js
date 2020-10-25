@@ -80,11 +80,19 @@ then close all select boxes:*/
 document.addEventListener("click", closeAllSelect);
 
 /*----file uploader-----*/
+function loadFile(event) {
+    var fileName = document.getElementById("file").value;
+    var idxDot = fileName.lastIndexOf(".") + 1;
+    var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
 
-var loadFile = function (event) {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function () {
-        URL.revokeObjectURL(output.src) // free memory
+    if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    } else {
+        alert("Only jpg/jpeg and png files are allowed!");
     }
-};
+}
+ 

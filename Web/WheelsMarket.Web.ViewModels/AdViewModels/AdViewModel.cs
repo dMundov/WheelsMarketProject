@@ -7,10 +7,13 @@ using WheelsMarket.Web.ViewModels.HomeViewModels;
 
 namespace WheelsMarket.Web.ViewModels.AdViewModels
 {
-    public class AdViewModel:IMapFrom<Ad>
+    public class AdViewModel : IMapFrom<Ad>
     {
+        public string Id { get; set; }
 
         public string Title { get; set; }
+
+        public DateTime CreatedOn { get; set; }
 
         public short BoltsNumber { get; set; }
 

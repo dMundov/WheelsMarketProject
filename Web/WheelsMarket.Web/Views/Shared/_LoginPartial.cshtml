@@ -8,6 +8,7 @@
 <ul class="nav navbar-nav navbar-right" style="display: inline">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
+
         <li>
             <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><span class="glyphicon glyphicon-user"></span>@(this.User.Identity.Name)</a>
         </li>

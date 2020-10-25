@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WheelsMarket.Data.Common.Repositories;
 using WheelsMarket.Data.Models;
@@ -25,7 +27,7 @@ namespace WheelsMarket.Services.Data
         {
             Ad ad = new Ad
             {
-                Title = "Джанти " + boltsNumber + "x" + interBoltDistance,
+                Title = "Джанти " + boltsNumber + "x" + interBoltDistance+ ", "+ centerBore,
                 BoltPattern = boltsNumber + "x" + interBoltDistance,
                 BoltsNumber = boltsNumber,
                 InterBoltDistance = interBoltDistance,
@@ -45,7 +47,7 @@ namespace WheelsMarket.Services.Data
 
         public T GetById<T>(string id)
         {
-            var ad = this.adRepository.All().Where(x => x.Id == id)
+            T ad = this.adRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
             return ad;
         }
@@ -53,12 +55,23 @@ namespace WheelsMarket.Services.Data
 
         public IEnumerable<T> GetLast10Ads<T>()
         {
-            var query = this.adRepository.All()
-                .OrderByDescending(x=>x.CreatedOn)
+            IQueryable<Ad> query = this.adRepository.All()
+                .OrderByDescending(x => x.CreatedOn)
                 .Take(10);
-            
+
             return query.To<T>()
                 .ToList(); ;
         }
+
+        public IEnumerable<T> GetAllAdsByUser<T>(string userId)
+        {
+            IQueryable<Ad> adsList = this.adRepository.All()
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedOn);
+
+            return adsList.To<T>()
+                  .ToList();
+        }
+
     }
 }

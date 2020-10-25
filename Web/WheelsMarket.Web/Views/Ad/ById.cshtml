@@ -1,3 +1,45 @@
-﻿@{
-    this.ViewData["Title"] = "Home Page";
+﻿@model WheelsMarket.Web.ViewModels.AdViewModels.AdViewModel
+@{
+    this.ViewData["Title"] = @Model.Title;
 }
+<h1>Обява @Model.Title</h1>
+
+<div>
+    <h4 class="movieTitles">@Html.DisplayFor(model => model.Title)</h4>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BoltPattern)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BoltPattern)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BoltsNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BoltsNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+    <picture>
+        <img src="@Model.MainPicture">
+    </picture>
+    <hr />
+</div>
+<div>
+    <a asp-controller="Home" asp-action="Index">Back to List</a>|
+    @*<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>*@
+</div>
