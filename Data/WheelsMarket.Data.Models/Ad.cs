@@ -44,6 +44,7 @@ namespace WheelsMarket.Data.Models
 
         public string MainPicture { get; set; }
 
+        [Required]
         public decimal Price { get; set; }
 
         [Required]
