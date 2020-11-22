@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WheelsMarket.Data.Migrations
 {
-    public partial class InitialModelsCreate : Migration
+    public partial class AddUserAdList : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,11 +107,12 @@ namespace WheelsMarket.Data.Migrations
                     InterBoltDistance = table.Column<int>(nullable: false),
                     Width = table.Column<double>(nullable: false),
                     Diameter = table.Column<int>(nullable: false),
-                    Offset = table.Column<short>(nullable: false),
+                    Offset = table.Column<double>(nullable: false),
                     CenterBore = table.Column<double>(nullable: false),
                     BoltPattern = table.Column<string>(nullable: false),
                     RimType = table.Column<string>(nullable: false),
-                    MainPicture = table.Column<string>(nullable: false),
+                    MainPicture = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
                     UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -220,25 +221,18 @@ namespace WheelsMarket.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    AdId = table.Column<int>(nullable: false),
-                    AdId1 = table.Column<string>(nullable: true),
-                    ParentId = table.Column<int>(nullable: true),
-                    Content = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true),
+                    AdId = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Ads_AdId1",
-                        column: x => x.AdId1,
+                        name: "FK_Comments_Ads_AdId",
+                        column: x => x.AdId,
                         principalTable: "Ads",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Comments_Comments_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Comments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -309,19 +303,14 @@ namespace WheelsMarket.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_AdId1",
+                name: "IX_Comments_AdId",
                 table: "Comments",
-                column: "AdId1");
+                column: "AdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_IsDeleted",
                 table: "Comments",
                 column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Comments_ParentId",
-                table: "Comments",
-                column: "ParentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",

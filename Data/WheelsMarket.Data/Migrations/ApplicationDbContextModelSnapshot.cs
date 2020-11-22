@@ -162,6 +162,9 @@ namespace WheelsMarket.Data.Migrations
                     b.Property<double>("Offset")
                         .HasColumnType("float");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("RimType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -313,13 +316,10 @@ namespace WheelsMarket.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("AdId1")
+                    b.Property<string>("AdId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Content")
+                    b.Property<string>("Body")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -334,19 +334,17 @@ namespace WheelsMarket.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AdId1");
+                    b.HasIndex("AdId");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ParentId");
 
                     b.HasIndex("UserId");
 
@@ -449,11 +447,7 @@ namespace WheelsMarket.Data.Migrations
                 {
                     b.HasOne("WheelsMarket.Data.Models.Ad", "Ad")
                         .WithMany("Comments")
-                        .HasForeignKey("AdId1");
-
-                    b.HasOne("WheelsMarket.Data.Models.Comment", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("AdId");
 
                     b.HasOne("WheelsMarket.Data.Models.ApplicationUser", "User")
                         .WithMany()

@@ -42,8 +42,9 @@ namespace WheelsMarket.Data.Models
         [Required]
         public RimType RimType { get; set; }
 
-
         public string MainPicture { get; set; }
+
+        public decimal Price { get; set; }
 
         [Required]
         public string UserId { get; set; }
