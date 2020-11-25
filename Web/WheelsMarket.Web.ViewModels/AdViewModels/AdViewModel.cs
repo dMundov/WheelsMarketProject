@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Data.Models.Enums;
-using WheelsMarket.Services.Mapping;
-using WheelsMarket.Web.ViewModels.HomeViewModels;
-
-namespace WheelsMarket.Web.ViewModels.AdViewModels
+﻿namespace WheelsMarket.Web.ViewModels.AdViewModels
 {
+
+    using System;
+    using Data.Models;
+    using Data.Models.Enums;
+    using Services.Mapping;
+
     public class AdViewModel : IMapFrom<Ad>
     {
         public string Id { get; set; }

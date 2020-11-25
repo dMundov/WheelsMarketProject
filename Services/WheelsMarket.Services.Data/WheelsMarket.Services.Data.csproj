@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\WheelsMarket.Data.Common\WheelsMarket.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\WheelsMarket.Data.Models\WheelsMarket.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\WheelsMarket.Web.ViewModels\WheelsMarket.Web.ViewModels.csproj" />
     <ProjectReference Include="..\WheelsMarket.Services.Mapping\WheelsMarket.Services.Mapping.csproj" />
   </ItemGroup>
 

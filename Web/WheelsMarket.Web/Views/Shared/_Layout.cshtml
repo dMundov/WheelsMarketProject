@@ -11,6 +11,10 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <environment names="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+        <script src="//js.pusher.com/4.0/pusher.min.js"></script>
+
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet">
         <!-- Bootstrap CSS File -->
@@ -24,10 +28,13 @@
         <!-- Main Stylesheet File -->
         <link href="~/css/style.css" rel="stylesheet">
         <link href="~/css/site.css" rel="stylesheet">
-        <!--Your custom colour override - predefined colours are: colour-blue.css, colour-green.css, colour-lavander.css, orange is default-->
-        <link href="#" id="colour-scheme" rel="stylesheet">
+        <!--Your custom colour override - predefined colours are: colour-blue.css, colour-green.css, colour-lavander.css, orange is default
+    <link href="#" id="colour-scheme" rel="stylesheet"> -->
     </environment>
     <environment names="Staging,Production">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
         <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Libraries CSS Files -->
         <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
@@ -37,8 +44,8 @@
         <!-- Main Stylesheet File -->
         <link href="~/css/style.css" rel="stylesheet">
         <link href="~/css/site.css" rel="stylesheet">
-        <!--Your custom colour override - predefined colours are: colour-blue.css, colour-green.css, colour-lavander.css, orange is default-->
-        <link href="~/css/colour-blue.css" id="colour-scheme" rel="stylesheet">
+        <!--Your custom colour override - predefined colours are: colour-blue.css, colour-green.css, colour-lavander.css, orange is default
+        <link href="~/css/colour-blue.css" id="colour-scheme" rel="stylesheet">-->
     </environment>
 </head>
 
