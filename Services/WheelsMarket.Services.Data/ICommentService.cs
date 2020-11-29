@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Web.ViewModels.Comment;
-
-namespace WheelsMarket.Services.Data
+﻿namespace WheelsMarket.Services.Data
 {
+    using System.Collections.Generic;
+
+    using System.Threading.Tasks;
+    using WheelsMarket.Web.ViewModels.Comment;
+
     public interface ICommentService
     {
 

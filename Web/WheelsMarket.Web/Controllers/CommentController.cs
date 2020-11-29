@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using PusherServer;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Services.Data;
-using WheelsMarket.Web.ViewModels.Comment;
-using WheelsMarket.Web.ViewModels.CommentViewModels;
-
-namespace WheelsMarket.Web.Controllers
+﻿namespace WheelsMarket.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using PusherServer;
+    using WheelsMarket.Data.Models;
+    using WheelsMarket.Services.Data;
+    using WheelsMarket.Web.ViewModels.Comment;
+    using WheelsMarket.Web.ViewModels.CommentViewModels;
+
+
     public class CommentController : Controller
     {
         private readonly ICommentService commentService;
@@ -54,7 +50,7 @@ namespace WheelsMarket.Web.Controllers
                 Cluster = "eu"
             };
 
-            var pusher = new Pusher("1101607", "7a46d9d6bd9b69256af2", "b924c7fd725b0e698991", options);
+            var pusher = new Pusher("1115013", "66ba1be85188c9d95935", "8e7bb1ac169466d0f4b9", options);
             ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
             return Content("ok");
         }

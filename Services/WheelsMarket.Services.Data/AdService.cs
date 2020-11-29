@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using WheelsMarket.Data.Common.Repositories;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Data.Models.Enums;
-using WheelsMarket.Services.Mapping;
-
+﻿
 namespace WheelsMarket.Services.Data
 {
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    
+    using WheelsMarket.Data.Common.Repositories;
+    using WheelsMarket.Data.Models;
+    using WheelsMarket.Data.Models.Enums;
+    using WheelsMarket.Services.Mapping;
+
+
     public class AdService : IAdService
     {
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WheelsMarket.Data.Migrations
 {
-    public partial class AddUserAdList : Migration
+    public partial class DateTimeChanges : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -221,10 +221,10 @@ namespace WheelsMarket.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Body = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true),
-                    AdId = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    Body = table.Column<string>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
+                    AdId = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

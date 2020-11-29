@@ -10,8 +10,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201122195821_AddUserAdList")]
-    partial class AddUserAdList
+    [Migration("20201129204412_DateTimeChanges")]
+    partial class DateTimeChanges
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -319,9 +319,11 @@ namespace WheelsMarket.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AdId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Body")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
@@ -337,9 +339,11 @@ namespace WheelsMarket.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -449,11 +453,15 @@ namespace WheelsMarket.Data.Migrations
                 {
                     b.HasOne("WheelsMarket.Data.Models.Ad", "Ad")
                         .WithMany("Comments")
-                        .HasForeignKey("AdId");
+                        .HasForeignKey("AdId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("WheelsMarket.Data.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

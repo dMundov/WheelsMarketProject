@@ -3,13 +3,11 @@ namespace WheelsMarket.Web.Controllers
 {
     using Microsoft.Extensions.Caching.Distributed;
     using Microsoft.Extensions.Logging;
-
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
 
     using WheelsMarket.Services.Data;
     using WheelsMarket.Web.ViewModels.HomeViewModels;
-    using System.Diagnostics;
-
-    using Microsoft.AspNetCore.Mvc;
     using WheelsMarket.Web.ViewModels;
 
     public class HomeController : BaseController

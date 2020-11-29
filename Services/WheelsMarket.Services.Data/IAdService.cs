@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using WheelsMarket.Data.Models.Enums;
-
-namespace WheelsMarket.Services.Data
+﻿namespace WheelsMarket.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using WheelsMarket.Data.Models.Enums;
+
     public interface IAdService
     {
         Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType, string userId);

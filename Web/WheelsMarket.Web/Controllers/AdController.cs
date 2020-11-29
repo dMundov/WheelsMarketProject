@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using WheelsMarket.Data.Common.Models;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Services.Data;
-using WheelsMarket.Web.ViewModels.AdViewModels;
-
-namespace WheelsMarket.Web.Controllers
+﻿namespace WheelsMarket.Web.Controllers
 {
+
+    using System.IO;
+
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.Processing;
+
+    using WheelsMarket.Data.Models;
+    using WheelsMarket.Services.Data;
+    using WheelsMarket.Web.ViewModels.AdViewModels;
+
     public class AdController : Controller
     {
         private readonly IAdService adService;
@@ -117,8 +115,5 @@ namespace WheelsMarket.Web.Controllers
             
             return this.View(allAdsForUser);
         }
-
-
-
     }
 }
