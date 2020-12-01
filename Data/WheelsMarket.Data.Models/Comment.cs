@@ -1,15 +1,11 @@
 ﻿
 namespace WheelsMarket.Data.Models
 {
-    using AutoMapper;
     using System.ComponentModel.DataAnnotations;
     using WheelsMarket.Data.Common.Models;
 
     public class Comment : BaseDeletableModel<int>
     {
-        public Comment()
-        {
-        }
 
         [Required]
         public string Body { get; set; }

@@ -1,11 +1,9 @@
 ﻿namespace WheelsMarket.Data
 {
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Threading.Tasks;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using WheelsMarket.Data.Common;
+    using Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

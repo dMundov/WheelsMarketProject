@@ -6,7 +6,7 @@ namespace WheelsMarket.Data.Models
     using System.ComponentModel.DataAnnotations;
    
     using WheelsMarket.Data.Common.Models;
-    using WheelsMarket.Data.Models.Enums;
+    using Enums;
 
     public class Ad : BaseDeletableModel<string>
     {

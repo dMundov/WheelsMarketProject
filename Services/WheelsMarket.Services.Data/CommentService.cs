@@ -1,17 +1,17 @@
 ﻿namespace WheelsMarket.Services.Data
 {
+    using Mapping;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Web.ViewModels.CommentViewModels;
     using WheelsMarket.Data.Common.Repositories;
     using WheelsMarket.Data.Models;
-    using WheelsMarket.Services.Mapping;
-    using WheelsMarket.Web.ViewModels.Comment;
-    
+
     public class CommentService : ICommentService
     {
 
+        // ReSharper disable once InconsistentNaming
         private readonly IDeletableEntityRepository<Comment> commentRepository;
 
         public CommentService(IDeletableEntityRepository<Comment> commentRepository)

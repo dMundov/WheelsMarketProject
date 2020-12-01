@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Data.Models.Enums;
 using WheelsMarket.Services.Mapping;
@@ -33,7 +34,6 @@ namespace WheelsMarket.Web.ViewModels.AdViewModels
         [Required]
         public RimType RimType { get; set; }
 
-        
         public string MainPicture { get; set; }
 
     }

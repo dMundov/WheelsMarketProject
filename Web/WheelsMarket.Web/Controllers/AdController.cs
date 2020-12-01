@@ -1,35 +1,33 @@
-﻿namespace WheelsMarket.Web.Controllers
+﻿
+namespace WheelsMarket.Web.Controllers
 {
-
-    using System.IO;
+    using CloudinaryDotNet;
 
     using System.Threading.Tasks;
-    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using SixLabors.ImageSharp;
-    using SixLabors.ImageSharp.Processing;
 
-    using WheelsMarket.Data.Models;
+
+    using Services;
+    using Data.Models;
     using WheelsMarket.Services.Data;
-    using WheelsMarket.Web.ViewModels.AdViewModels;
+    using ViewModels.AdViewModels;
 
     public class AdController : Controller
     {
+        private readonly Cloudinary cloudinary;
         private readonly IAdService adService;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IMapper mapper;
-        private readonly IWebHostEnvironment environment;
 
-        public AdController(IAdService adService, UserManager<ApplicationUser> userManager, IWebHostEnvironment environment)
+
+
+        public AdController(IAdService adService, UserManager<ApplicationUser> userManager, Cloudinary cloudinary)
         {
             this.adService = adService;
             this.userManager = userManager;
-            this.environment = environment;
-
+            this.cloudinary = cloudinary;
         }
 
 
@@ -59,27 +57,16 @@
             ApplicationUser user = await this.userManager.GetUserAsync(this.User);
 
 
+            IFormFile file = HttpContext.Request.Form.Files[0];
+            string folder = $"AdsImages/{user.Id}";
 
-            string webRootPath = environment.WebRootPath;
-            IFormFileCollection file = HttpContext.Request.Form.Files;
-
-            if (file.Count != 0)
+            if (file != null)
             {
-                string uploads = Path.Combine(webRootPath, @"images");
-                string extension = Path.GetExtension(file[0].FileName);
-
-                //resize and save uploading  image
-                using var image = Image.Load(file[0].OpenReadStream());
-                image.Mutate(x => x.Resize(500, 500));
-                image.Save(Path.Combine(uploads, user.Id + file[0].FileName));
-
-
-                input.MainPicture = @"\" + @"images" + @"\" + user.Id + file[0].FileName;
+                input.MainPicture = await CloudinaryService.UploadAsync(this.cloudinary, file, folder, user.Id);
             }
             else
             {
                 input.MainPicture = @"\" + @"images" + @"\" + "-default_image.png";
-
             }
             if (!this.ModelState.IsValid)
             {
@@ -112,8 +99,9 @@
                 {
                     AllAds = this.adService.GetAllAdsByUser<AdViewModel>(user.Id)
                 };
-            
+
             return this.View(allAdsForUser);
         }
+
     }
 }

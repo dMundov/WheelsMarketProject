@@ -7,8 +7,8 @@ namespace WheelsMarket.Web.Controllers
     using Microsoft.AspNetCore.Mvc;
 
     using WheelsMarket.Services.Data;
-    using WheelsMarket.Web.ViewModels.HomeViewModels;
-    using WheelsMarket.Web.ViewModels;
+    using ViewModels.HomeViewModels;
+    using ViewModels;
 
     public class HomeController : BaseController
     {

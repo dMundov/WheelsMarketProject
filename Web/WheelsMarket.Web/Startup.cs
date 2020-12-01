@@ -1,4 +1,7 @@
-﻿namespace WheelsMarket.Web
+﻿using CloudinaryDotNet;
+using WheelsMarket.Services;
+
+namespace WheelsMarket.Web
 {
     using System.Reflection;
 
@@ -48,6 +51,14 @@
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            Account account = new Account(
+
+                "wheelsmarket",
+                "337567987356625",
+                "j3r4iECeQba_VK-P7kcedWy3804");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
 
             services.AddSingleton(this.configuration);
 
@@ -61,6 +72,8 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IAdService, AdService>();
             services.AddTransient<ICommentService, CommentService>();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

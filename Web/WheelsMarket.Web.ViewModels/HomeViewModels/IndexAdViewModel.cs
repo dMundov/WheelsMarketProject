@@ -1,8 +1,8 @@
 ﻿namespace WheelsMarket.Web.ViewModels.HomeViewModels
 {
-    using WheelsMarket.Data.Models;
-    using WheelsMarket.Data.Models.Enums;
-    using WheelsMarket.Services.Mapping;
+    using Data.Models;
+    using Data.Models.Enums;
+    using Services.Mapping;
 
     public class IndexAdViewModel : IMapFrom<Ad>
     {

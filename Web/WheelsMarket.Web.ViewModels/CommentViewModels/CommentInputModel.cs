@@ -1,7 +1,7 @@
-﻿namespace WheelsMarket.Web.ViewModels.Comment
+﻿namespace WheelsMarket.Web.ViewModels.CommentViewModels
 {
-    using WheelsMarket.Services.Mapping;
-    using WheelsMarket.Data.Models;
+    using Services.Mapping;
+    using Data.Models;
 
     public class CommentInputModel : IMapFrom<Comment>
     {

@@ -5,10 +5,9 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using PusherServer;
-    using WheelsMarket.Data.Models;
+    using Data.Models;
     using WheelsMarket.Services.Data;
-    using WheelsMarket.Web.ViewModels.Comment;
-    using WheelsMarket.Web.ViewModels.CommentViewModels;
+    using ViewModels.CommentViewModels;
 
 
     public class CommentController : Controller
@@ -52,7 +51,7 @@
 
             var pusher = new Pusher("1115013", "66ba1be85188c9d95935", "8e7bb1ac169466d0f4b9", options);
             ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
-            return Content("ok");
+            return  new OkObjectResult(data);
         }
 
     }

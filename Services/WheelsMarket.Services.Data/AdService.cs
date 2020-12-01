@@ -2,19 +2,19 @@
 namespace WheelsMarket.Services.Data
 {
 
+    using Mapping;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    
     using WheelsMarket.Data.Common.Repositories;
     using WheelsMarket.Data.Models;
     using WheelsMarket.Data.Models.Enums;
-    using WheelsMarket.Services.Mapping;
 
 
     public class AdService : IAdService
     {
 
+        // ReSharper disable once InconsistentNaming
         private readonly IDeletableEntityRepository<Ad> adRepository;
 
         public AdService(IDeletableEntityRepository<Ad> adRepository)
@@ -59,7 +59,7 @@ namespace WheelsMarket.Services.Data
                 .Take(10);
 
             return query.To<T>()
-                .ToList(); ;
+                .ToList();
         }
 
         public IEnumerable<T> GetAllAdsByUser<T>(string userId)

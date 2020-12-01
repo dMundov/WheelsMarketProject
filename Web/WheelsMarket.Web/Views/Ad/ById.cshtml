@@ -41,9 +41,7 @@
             @Html.DisplayFor(model => model.CreatedOn)
         </dd>
     </dl>
-    <picture>
-        <img src="@Model.MainPicture">
-    </picture>
+    <img src="@Model.MainPicture" width="500" height="500">
     <hr />
 </div>
 <div>
@@ -57,18 +55,14 @@
             <div class="col-md-8">
                 <div class="page-header">
                     <h1><small class="pull-right">{{comments.length}} Коментари</small></h1>
-                    <br/>
+                    <br />
                 </div>
-                
                 <div class="comments-list">
                     <div class="media" v-for="com in comments">
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <div class="col-xs-2 col-md-1">
-                                            <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" />
-                                        </div>
                                         <div class="col-xs-10 col-md-11">
                                             <div>
                                                 <div class="mic-info">
@@ -135,12 +129,9 @@
             get_comments: function() {
                 axios.get(
                     '@Url.Action("GetAllComments", "Comment", new {id = @Model.Id}, protocol: "https")')
-                
+
                     .then((response) => {
-
-                        this.comments.sort((b, a) => new Date(b.createdOn) - new Date(a.createdOn));
                         this.comments = response.data;
-
                     });
 
             },
@@ -150,16 +141,13 @@
                         if (data.AdId === this.comment.AdId) {
                             this.comments.push(data);
                         }
-
                     });
             },
             submit_comment: function () {
                 axios.post('@Url.Action("AddComment", "Comment", new {}, protocol: "https")', this.comment)
                     .then((response) => {
-                        this.comment.UserName = '';
                         this.comment.Body = '';
                         alert("Вашият коментар е записан!");
-
                     });
             }
         }

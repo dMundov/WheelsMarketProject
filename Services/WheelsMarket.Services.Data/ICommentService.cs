@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using System.Threading.Tasks;
-    using WheelsMarket.Web.ViewModels.Comment;
+    using Web.ViewModels.CommentViewModels;
 
     public interface ICommentService
     {

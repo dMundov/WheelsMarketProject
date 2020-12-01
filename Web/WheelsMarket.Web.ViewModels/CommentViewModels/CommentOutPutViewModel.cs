@@ -1,11 +1,8 @@
-﻿
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace WheelsMarket.Web.ViewModels.CommentViewModels
+﻿namespace WheelsMarket.Web.ViewModels.CommentViewModels
 {
-    using WheelsMarket.Services.Mapping;
-    using WheelsMarket.Data.Models;
+    using System;
+    using Services.Mapping;
+    using Data.Models;
 
     public class CommentOutPutViewModel : IMapFrom<Comment>
     {
@@ -14,7 +11,7 @@ namespace WheelsMarket.Web.ViewModels.CommentViewModels
         public string UserName { get; set; }
 
         public string Body { get; set; }
-        
+
         public DateTime CreatedOn { get; set; }
 
 
