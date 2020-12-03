@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Services.Data
+﻿using WheelsMarket.Data.Models;
+
+namespace WheelsMarket.Services.Data
 {
     using System.Collections.Generic;
 
@@ -8,7 +10,7 @@
     public interface ICommentService
     {
 
-        Task CreateNewComment(CommentInputModel data);
+        Task<CommentOutPutViewModel> CreateNewComment(CommentInputModel data);
         
         IEnumerable<T> CommentsForCurrentAd<T> (string id);
 

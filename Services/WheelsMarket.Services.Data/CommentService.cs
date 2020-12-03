@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Services.Data
+﻿using System.Globalization;
+
+namespace WheelsMarket.Services.Data
 {
     using Mapping;
     using System.Collections.Generic;
@@ -29,7 +31,7 @@
                 .ToArray();
         }
 
-        public async Task CreateNewComment(CommentInputModel data)
+        public async Task<CommentOutPutViewModel> CreateNewComment(CommentInputModel data)
         {
             Comment newComment = new Comment
             {
@@ -41,6 +43,16 @@
             };
             await commentRepository.AddAsync(newComment);
             await commentRepository.SaveChangesAsync();
+
+            CommentOutPutViewModel commentToPush = new CommentOutPutViewModel()
+            {
+                AdId = newComment.AdId,
+                UserName = newComment.UserName,
+                Body = newComment.Body,
+                CreatedOn = newComment.CreatedOn.ToLocalTime().ToString("f",
+                    DateTimeFormatInfo.InvariantInfo)
+            };
+            return commentToPush;
         }
     }
 

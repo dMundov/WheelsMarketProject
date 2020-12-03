@@ -34,7 +34,7 @@
         {
             ApplicationUser user = await this.userManager.GetUserAsync(this.User);
 
-            CommentInputModel data = new CommentInputModel
+            CommentInputModel commentData = new CommentInputModel
             {
                 Body = inputCommentData.Body,
                 AdId = inputCommentData.AdId,
@@ -42,7 +42,7 @@
                 UserId = user.Id
             };
             
-            await commentService.CreateNewComment(data);
+            CommentOutPutViewModel commentToPush = await commentService.CreateNewComment(commentData);
             
             var options = new PusherOptions
             {
@@ -50,8 +50,8 @@
             };
 
             var pusher = new Pusher("1115013", "66ba1be85188c9d95935", "8e7bb1ac169466d0f4b9", options);
-            ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
-            return  new OkObjectResult(data);
+            ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", commentToPush);
+            return  Content("CommentAddSuccessfully");
         }
 
     }

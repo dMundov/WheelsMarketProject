@@ -66,11 +66,11 @@
                                         <div class="col-xs-10 col-md-11">
                                             <div>
                                                 <div class="mic-info">
-                                                    By: <a href="#">{{com.userName}}</a> {{com.createdOn}}
+                                                    By: <a href="#">{{com.UserName}}</a> {{com.CreatedOn}}
                                                 </div>
                                             </div>
                                             <div class="comment-text">
-                                                {{com.body}}
+                                                {{com.Body}}
                                             </div>
                                             <div class="action">
                                                 <button type="button" class="btn btn-primary btn-xs" title="Edit">
@@ -127,14 +127,15 @@
         },
         methods: {
             get_comments: function() {
-                axios.get(
-                    '@Url.Action("GetAllComments", "Comment", new {id = @Model.Id}, protocol: "https")')
+                window.axios.get(
+                        '@Url.Action("GetAllComments", "Comment", new {id = @Model.Id}, protocol: "https")')
 
                     .then((response) => {
                         this.comments = response.data;
                     });
 
             },
+
             listen: function () {
                 my_channel.bind("asp_event",
                     (data) => {
@@ -144,7 +145,7 @@
                     });
             },
             submit_comment: function () {
-                axios.post('@Url.Action("AddComment", "Comment", new {}, protocol: "https")', this.comment)
+                window.axios.post('@Url.Action("AddComment", "Comment", new {}, protocol: "https")', this.comment)
                     .then((response) => {
                         this.comment.Body = '';
                         alert("Вашият коментар е записан!");

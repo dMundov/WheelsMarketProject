@@ -51,6 +51,14 @@ namespace WheelsMarket.Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            //the property names are to remain unchanged
+            services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+                });
+
             Account account = new Account(
 
                 "wheelsmarket",
