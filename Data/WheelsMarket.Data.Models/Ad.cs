@@ -13,6 +13,7 @@ namespace WheelsMarket.Data.Models
         public Ad()
         {
             this.Id = Guid.NewGuid().ToString();
+            IsApproved = false;
         }
 
         [Required]
@@ -46,6 +47,13 @@ namespace WheelsMarket.Data.Models
 
         [Required]
         public decimal Price { get; set; }
+
+        [Required]
+        [MaxLength(500)]
+        public string Description { get; set; }
+
+        
+        public bool IsApproved { get; set; }
 
         [Required]
         public string UserId { get; set; }

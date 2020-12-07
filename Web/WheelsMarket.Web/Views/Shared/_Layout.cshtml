@@ -28,8 +28,6 @@
         <!-- Main Stylesheet File -->
         <link href="~/css/style.css" rel="stylesheet">
         <link href="~/css/site.css" rel="stylesheet">
-        <!--Your custom colour override - predefined colours are: colour-blue.css, colour-green.css, colour-lavander.css, orange is default
-    <link href="#" id="colour-scheme" rel="stylesheet"> -->
     </environment>
     <environment names="Staging,Production">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -116,10 +114,6 @@
                         <div class="col-md-8">
                             <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
                             <a class="navbar-brand" asp-controller="Home" asp-action="Index">
-                                <h1 class="hidden">
-                                    <img src="img/logo.png" alt="Flexor Logo">
-                                    Flexor
-                                </h1>
                             </a>
                             <div class="navbar-slogan">
                                 Добре дошли в <a asp-controller="Home" asp-action="Index"><span class="text-primary">WheelsMarket.com</span></a>
@@ -149,7 +143,7 @@
                                         Профил
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" asp-controller="Ad" asp-action="GetAllAdsByUser">Моите Обяви</a>
+                                        <a class="dropdown-item" asp-controller="Profile" asp-action="AdsList">Всички Мои Обяви</a>
                                         <a class="dropdown-item" href="#">Another action</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" href="#">Something else here</a>
@@ -166,7 +160,7 @@
                         <ul class="list-unstyled">
                             <li class="nav-item">
                                 <form class="form-inline" id="newAdButton">
-                                    <button asp-controller="Ad" asp-action="Create" class="btn btn-outline-success" type="submit">Публикувай обява</button>
+                                    <button asp-controller="Ads" asp-action="Create" class="btn btn-outline-success" type="submit">Публикувай обява</button>
                                 </form>
                             </li>
                         </ul>
