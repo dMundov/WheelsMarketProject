@@ -141,11 +141,6 @@ body {
 
 
 /* Split the screen in half */
-.split {
-    border-radius: 0.1px;
-    box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3);
-}
-
 /* Control the left side */
 .left {
     width: 49%;
@@ -155,7 +150,7 @@ body {
 }
 /* Control the right side */
 .right {
-    width: 49%;
+    width: 45%;
     float: right;
 }
 
