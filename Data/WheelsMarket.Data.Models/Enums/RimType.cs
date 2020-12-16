@@ -6,7 +6,7 @@ namespace WheelsMarket.Data.Models.Enums
 {
     public enum RimType
     {
-        Aluminum,
-        Iron
+        Железни,
+        Алуминиеви
     }
 }

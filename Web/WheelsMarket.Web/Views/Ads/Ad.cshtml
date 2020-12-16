@@ -1,0 +1,158 @@
+﻿@model WheelsMarket.Web.ViewModels.AdViewModels.AdViewModel
+
+@using Microsoft.AspNetCore.Identity
+@using WheelsMarket.Data.Models
+
+
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    this.ViewData["Title"] = @Model.Title;
+}
+
+<h1 class="Titles">Обява @Model.Title</h1>
+
+<div class="Titles">
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BoltPattern)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BoltPattern)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BoltsNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BoltsNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+    </dl>
+    <img src="@Model.MainPicture" width="500" height="500">
+    <hr />
+</div>
+<div>
+    <a asp-controller="Profile" asp-action="AdsList">Back to List</a>|
+    @*<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>*@
+</div>
+<br />
+<div id="app">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="page-header">
+                    <h1><small class="pull-right">{{comments.length}} Коментари</small></h1>
+                    <br />
+                </div>
+                <div class="comments-list">
+                    <div class="media" v-for="com in comments">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-xs-10 col-md-11">
+                                            <div>
+                                                <div class="mic-info">
+                                                    By: <a href="#">{{com.UserName}}</a> {{com.CreatedOn}}
+                                                </div>
+                                            </div>
+                                            <div class="comment-text">
+                                                {{com.Body}}
+                                            </div>
+                                            <div class="action">
+                                                <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-success btn-xs" title="Approved">
+                                                    <span class="glyphicon glyphicon-ok"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-xs" title="Delete">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (this.SignInManager.IsSignedIn(this.User))
+    {
+        <div class="container" id="CommentText">
+            <br />
+            <p>Напиши коментар</p>
+            <form onsubmit="return false;">
+                <textarea rows="3" placeholder="Your Comment" id="Body" v-model="comment.Body" class="form-control"></textarea>
+                <button class="btn btn-success" v-on:click="submit_comment()">Запиши</button>
+            </form>
+        </div>
+    }
+</div>
+<!-- comments engine-->
+<script>
+    var pusher = new Pusher('66ba1be85188c9d95935', {
+        cluster: 'eu'
+    });
+    var my_channel = pusher.subscribe('asp_channel');
+    var app = new Vue({
+        el: '#app',
+        data: {
+            comments: [],
+            comment: {
+                Body: '',
+                AdId: '@Model.Id'
+            }
+        },
+        created: function() {
+            this.get_comments();
+            this.listen();
+        },
+        methods: {
+            get_comments: function() {
+                window.axios.get(
+                        '@Url.Action("GetAllComments", "Comment", new {id = @Model.Id}, protocol: "https")')
+
+                    .then((response) => {
+                        this.comments = response.data;
+                    });
+
+            },
+
+            listen: function () {
+                my_channel.bind("asp_event",
+                    (data) => {
+                        if (data.AdId === this.comment.AdId) {
+                            this.comments.push(data);
+                        }
+                    });
+            },
+            submit_comment: function () {
+                window.axios.post('@Url.Action("AddComment", "Comment", new {}, protocol: "https")', this.comment)
+                    .then((response) => {
+                        this.comment.Body = '';
+                        alert("Вашият коментар е записан!");
+                    });
+            }
+        }
+    });
+    Vue.config.devtools = true;
+</script>

@@ -12,7 +12,7 @@ namespace WheelsMarket.Data
     using Microsoft.EntityFrameworkCore;
 
     using WheelsMarket.Data.Common.Models;
-    using WheelsMarket.Data.Models;
+    using Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using WheelsMarket.Data.Models;
-using WheelsMarket.Data.Models.Enums;
-using WheelsMarket.Services.Mapping;
-
-namespace WheelsMarket.Web.ViewModels.AdViewModels
+﻿namespace WheelsMarket.Web.ViewModels.AdViewModels
 {
+    using System.ComponentModel.DataAnnotations;
+    
+    using Data.Models;
+    using Data.Models.Enums;
+    using Services.Mapping;
+
     public class CreateAdInputModel : IMapTo<Ad>
     {
 
@@ -33,6 +29,9 @@ namespace WheelsMarket.Web.ViewModels.AdViewModels
 
         [Required]
         public RimType RimType { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
 
         public string MainPicture { get; set; }
 

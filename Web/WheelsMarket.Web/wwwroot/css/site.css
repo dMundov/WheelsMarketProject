@@ -1,6 +1,15 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+input[type=number] {
+     -moz-appearance: textfield !important;
+}
+
 a.navbar-brand {
     white-space: normal;
     text-align: center;
@@ -114,7 +123,7 @@ body {
     margin-right: 3px;
 }
 
-#addNewAddParameters {
+#addNewAdParameters {
     color: antiquewhite;
 }
 
@@ -214,4 +223,9 @@ body {
 .widget .btn-block {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
+}
+
+#priceField {
+    text-align: right !important;
+    float: right !important; 
 }
