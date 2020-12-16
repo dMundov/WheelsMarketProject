@@ -22,7 +22,7 @@ namespace WheelsMarket.Services.Data
             this.adRepository = adRepository;
         }
 
-        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType,decimal price, string userId)
+        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType,decimal price, string description, string userId)
         {
             Ad ad = new Ad
             {
@@ -37,7 +37,8 @@ namespace WheelsMarket.Services.Data
                 MainPicture = mainPicture,
                 RimType = rimType,
                 UserId = userId,
-                Price=price
+                Price=price,
+                Description = description
             };
 
             await this.adRepository.AddAsync(ad);

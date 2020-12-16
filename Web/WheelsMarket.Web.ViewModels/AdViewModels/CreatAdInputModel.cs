@@ -32,6 +32,9 @@
 
         [Required]
         public decimal Price { get; set; }
+        
+        [Required]
+        public string Description { get; set; }
 
         public string MainPicture { get; set; }
 

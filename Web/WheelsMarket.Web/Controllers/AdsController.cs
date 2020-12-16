@@ -90,8 +90,9 @@ namespace WheelsMarket.Web.Controllers
                 , input.CenterBore
                 , input.MainPicture
                 , input.RimType
-                  ,input.Price
-                  , user.Id);
+                ,input.Price
+                ,input.Description
+                ,user.Id);
             this.TempData["InfoMessage"] = "Ad has created!";
             return this.RedirectToAction(nameof(this.Ad), new { id = adId });
 
