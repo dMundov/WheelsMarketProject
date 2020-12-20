@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Web.ViewModels.CommentViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WheelsMarket.Web.ViewModels.CommentViewModels
 {
     using System;
     using Services.Mapping;

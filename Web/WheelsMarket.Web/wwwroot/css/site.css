@@ -224,3 +224,13 @@ body {
     text-align: right !important;
     float: right !important; 
 }
+#adParametersBox {
+    width: 500px;
+    height: 500px;
+    padding-right: 50px;
+    padding-left: 30px;
+    padding-top: 20px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: azure;
+}

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 namespace WheelsMarket.Services.Data
 {
@@ -25,7 +26,6 @@ namespace WheelsMarket.Services.Data
         {
             IQueryable<Comment> commentsList = this.commentRepository.All()
                 .Where(x => x.AdId == id);
-
             return commentsList
                 .To<T>()
                 .ToArray();
@@ -49,7 +49,7 @@ namespace WheelsMarket.Services.Data
                 AdId = newComment.AdId,
                 UserName = newComment.UserName,
                 Body = newComment.Body,
-                CreatedOn = newComment.CreatedOn.ToLocalTime().ToString("f",
+                CreatedOn = newComment.CreatedOn.ToLocalTime().ToString("g",
                     DateTimeFormatInfo.InvariantInfo)
             };
             return commentToPush;
