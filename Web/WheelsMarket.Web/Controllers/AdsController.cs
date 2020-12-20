@@ -1,4 +1,9 @@
 ﻿
+using System.Collections;
+using System.Collections.Generic;
+using WheelsMarket.Web.ViewModels.HomeViewModels;
+using WheelsMarket.Web.ViewModels.SearchInputModels;
+
 namespace WheelsMarket.Web.Controllers
 {
     using CloudinaryDotNet;
@@ -56,16 +61,16 @@ namespace WheelsMarket.Web.Controllers
         {
             ApplicationUser user = await this.userManager.GetUserAsync(this.User);
             IFormFile file;
-            
+
             try
             {
-                 file = HttpContext.Request.Form.Files[0];
+                file = HttpContext.Request.Form.Files[0];
             }
             catch
             {
                 file = null;
             }
-            
+
             string folder = $"AdsImages/user:{user.Id}";
 
             if (file != null)
@@ -90,12 +95,22 @@ namespace WheelsMarket.Web.Controllers
                 , input.CenterBore
                 , input.MainPicture
                 , input.RimType
-                ,input.Price
-                ,input.Description
-                ,user.Id);
+                , input.Price
+                , input.Description
+                , user.Id);
             this.TempData["InfoMessage"] = "Ad has created!";
             return this.RedirectToAction(nameof(this.Ad), new { id = adId });
 
+        }
+
+        public IActionResult QuickSearch(QuickSearchInputModel searchInputModel)
+        {
+            QuickSearchListModel resultFromSearch = new QuickSearchListModel
+            {
+                SearchResult = adService.SearchAds<IndexAdViewModel>(searchInputModel)
+            };
+
+            return this.View(resultFromSearch);
         }
     }
 }

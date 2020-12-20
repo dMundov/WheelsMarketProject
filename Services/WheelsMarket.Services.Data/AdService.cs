@@ -1,4 +1,7 @@
 ﻿
+using System.Security.Cryptography.X509Certificates;
+using WheelsMarket.Web.ViewModels.HomeViewModels;
+
 namespace WheelsMarket.Services.Data
 {
 
@@ -9,6 +12,7 @@ namespace WheelsMarket.Services.Data
     using WheelsMarket.Data.Common.Repositories;
     using WheelsMarket.Data.Models;
     using WheelsMarket.Data.Models.Enums;
+    using Web.ViewModels.SearchInputModels;
 
 
     public class AdService : IAdService
@@ -72,6 +76,20 @@ namespace WheelsMarket.Services.Data
 
             return adsList.To<T>()
                   .ToList();
+        }
+
+        public IEnumerable<T> SearchAds<T>(QuickSearchInputModel quickSearchInputModel)
+        {
+            IQueryable<Ad> searchResult = adRepository
+                .All()
+                .Where(x => x.Diameter == quickSearchInputModel.Diameter)
+                .Where(x => x.BoltsNumber == quickSearchInputModel.BoltsNumber)
+                .Where(x => x.InterBoltDistance == quickSearchInputModel.InterBoltDistance)
+                .Where(x => x.Offset == quickSearchInputModel.Offset)
+                .Where(x => x.CenterBore == quickSearchInputModel.CenterBore)
+                .Where(x => x.Width == quickSearchInputModel.Width);
+
+            return searchResult.To<T>().ToList();
         }
 
     }

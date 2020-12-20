@@ -139,21 +139,6 @@ body {
     color: antiquewhite;
 }
 
-
-/* Split the screen in half */
-/* Control the left side */
-.left {
-    width: 49%;
-    float: left;
-    margin-bottom: 10px;
-    margin-right: 1px;
-}
-/* Control the right side */
-.right {
-    width: 45%;
-    float: right;
-}
-
 .frame {
     width: auto;
     height: auto;
@@ -218,11 +203,6 @@ body {
 .widget .btn-block {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-}
-
-#priceField {
-    text-align: right !important;
-    float: right !important; 
 }
 #adParametersBox {
     width: 500px;
