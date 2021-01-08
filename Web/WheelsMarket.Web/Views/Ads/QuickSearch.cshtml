@@ -1,0 +1,30 @@
+﻿@model WheelsMarket.Web.ViewModels.SearchInputModels.QuickSearchListModel
+
+@if (!Model.SearchResult.Any())
+{
+    <div class="container">
+        <h3 class="Titles">Не бяха открити резултати от вашето търсене !</h3>
+    </div>
+}
+else
+{
+    <div class=card-deck>
+        <div class="row">
+            @foreach (var item in Model.SearchResult)
+            {
+                <ul class="cards">
+                    <li class="cards_item">
+                        <div class="card" style="width: 14rem; position: center">
+                            <img class="card-img-top" src="@item.MainPicture" alt="Ads">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-weight: 700">@Html.DisplayFor(modelItem => item.Title)</h5>
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                                <a asp-controller="Ads" asp-action="Ad" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Към обявата</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            }
+        </div>
+    </div>
+}

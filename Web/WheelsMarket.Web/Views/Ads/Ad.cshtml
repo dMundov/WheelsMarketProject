@@ -9,65 +9,70 @@
 @{
     this.ViewData["Title"] = @Model.Title;
 }
-<br />
-<div class="row">
-    <div class="col-md-auto">
-        <h1 class="Titles"> @Model.Title</h1>
-        <hr />
-        <p class="Titles">Дата на създаване: @Model.CreatedOn</p>
-    </div>
-</div>
-<div class="Titles">
+<div class="container">
+    <br />
+    <h1 class="Titles"> @Model.Title</h1>
     <hr />
     <div class="row">
-        <div class="col-md-auto">
-            <img src="@Model.MainPicture" width="500" height="500">
+        <div class="col-xs-10">
+            <p class="Titles">Дата на създаване: @Model.CreatedOn</p>
         </div>
-        <div class="col-md-auto" id="adParametersBox">
-            <br />
-            <ul class="list-group list-group-flush bg-transparent">
-                <li class="list-group-item bg-transparent">
-                    <label>Диаметър - </label>
-                    @Model.Diameter "
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Болтове - </label>
-                    @Model.BoltsNumber
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Междуболтово разстояние (PSD) - </label>
-                    @Model.InterBoltDistance
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Централен Отвор - </label>
-                    @Model.CenterBore
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Офсет (ЕТ) - </label>
-                    @Model.Offset
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Ширина (J) - </label>
-                    @Model.Width
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Описание - </label>
-                    @Model.Description
-                </li>
-                <li class="list-group-item bg-transparent">
-                    <label>Цена - </label>
-                    @Model.Price лв.
-                </li>
-            </ul>
+        <div class="col-xs-2">
+            <p class="Titles">Видяна: @Model.ViewCount пъти</p>
         </div>
-
     </div>
+    <div class="Titles">
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Model.MainPicture" width="500" height="500">
+            </div>
+            <div class="col-md-6" id="adParametersBox">
+                <br />
+                <ul class="list-group list-group-flush bg-transparent">
+                    <li class="list-group-item bg-transparent">
+                        <label>Диаметър - </label>
+                        @Model.Diameter "
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Болтове - </label>
+                        @Model.BoltsNumber
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Междуболтово разстояние (PSD) - </label>
+                        @Model.InterBoltDistance
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Централен Отвор - </label>
+                        @Model.CenterBore
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Офсет (ЕТ) - </label>
+                        @Model.Offset
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Ширина (J) - </label>
+                        @Model.Width
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Описание - </label>
+                        @Model.Description
+                    </li>
+                    <li class="list-group-item bg-transparent">
+                        <label>Цена - </label>
+                        @Model.Price лв.
+                    </li>
+                </ul>
+            </div>
 
-    <hr />
-</div>
-<div>
-    <a asp-controller="Profile" asp-action="AdsList">Back to List</a>|
-    @*<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>*@
+        </div>
+
+        <hr />
+    </div>
+    <div>
+        <a asp-controller="Profile" asp-action="AdsList">Back to List</a>|
+        @*<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>*@
+    </div>
 </div>
 <br />
 <div id="app">

@@ -51,8 +51,10 @@ namespace WheelsMarket.Data.Models
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
-
         
+        [Required]
+        public int ViewCount { get; set; }
+
         public bool IsApproved { get; set; }
 
         [Required]

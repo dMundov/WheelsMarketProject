@@ -26,7 +26,6 @@
             {
                 File = new FileDescription(file.FileName, destinationStream),
                 PublicId = $"{folderName}/{fileName}"
-
             };
             var results = await cloudinary.UploadAsync(uploadParams);
             return results.Url.AbsoluteUri;

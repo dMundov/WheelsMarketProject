@@ -26,11 +26,11 @@ namespace WheelsMarket.Services.Data
             this.adRepository = adRepository;
         }
 
-        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType,decimal price, string description, string userId)
+        public async Task<string> CreateAdAsync(short boltsNumber, int interBoltDistance, double width, int diameter, double offset, double centerBore, string mainPicture, RimType rimType, decimal price, string description, string userId)
         {
             Ad ad = new Ad
             {
-                Title = "Джанти " + boltsNumber + "x" + interBoltDistance+ ", "+ centerBore,
+                Title = "Джанти " + boltsNumber + "x" + interBoltDistance + ", " + centerBore,
                 BoltPattern = boltsNumber + "x" + interBoltDistance,
                 BoltsNumber = boltsNumber,
                 InterBoltDistance = interBoltDistance,
@@ -41,7 +41,7 @@ namespace WheelsMarket.Services.Data
                 MainPicture = mainPicture,
                 RimType = rimType,
                 UserId = userId,
-                Price=price,
+                Price = price,
                 Description = description
             };
 
@@ -52,9 +52,21 @@ namespace WheelsMarket.Services.Data
 
         public T GetById<T>(string id)
         {
-            T ad = this.adRepository.All().Where(x => x.Id == id)
+            T adToReturn = this.adRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
-            return ad;
+
+            var ad = this.adRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+
+            if (ad != null)
+            {
+                ad.ViewCount += 1;
+               
+                this.adRepository.Update(ad); 
+                this.adRepository.SaveChangesAsync();
+            }
+            return adToReturn;
         }
 
 
