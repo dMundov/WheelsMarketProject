@@ -450,7 +450,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">@item.Title</h5>
                                 <p class="single-line"> @item.Description</p>
-                                <a asp-controller="Ads" asp-action="Ad" class="btn btn-more"><i class="fa fa-plus"></i>Към обявата</a>
+                                <a asp-controller="Ads" asp-action="Ad" class="btn btn-more" asp-route-id="@item.Id"><i class="fa fa-plus"></i>Към обявата</a>
                             </div>
                         </div>
                     }
