@@ -16,7 +16,9 @@
 
         public double CenterBore { get; set; }
 
-        public IEnumerable<IndexAdViewModel> Ads { get; set; }
+        public IEnumerable<IndexAdViewModel> LastTenAds { get; set; }
+
+        public IEnumerable<IndexAdViewModel> TopFiveAdsByViews { get; set; }
 
     }
     

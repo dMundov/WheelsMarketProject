@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using WheelsMarket.Web.ViewModels.HomeViewModels;
@@ -101,6 +102,19 @@ namespace WheelsMarket.Web.Controllers
             this.TempData["InfoMessage"] = "Ad has created!";
             return this.RedirectToAction(nameof(this.Ad), new { id = adId });
 
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                await this.adService.DeleteAdAsync(id);
+                return this.RedirectToAction("AdsList", "Profile");
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         public IActionResult QuickSearch(QuickSearchInputModel searchInputModel)

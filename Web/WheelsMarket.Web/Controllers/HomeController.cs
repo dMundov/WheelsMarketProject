@@ -30,8 +30,10 @@ namespace WheelsMarket.Web.Controllers
         {
             IndexViewModel viewModel = new IndexViewModel
             {
-                Ads =
-                    this.adService.GetLast10Ads<IndexAdViewModel>()
+                LastTenAds = 
+                    this.adService.GetLatest10Ads<IndexAdViewModel>(),
+                TopFiveAdsByViews=
+                    this.adService.TopFiveAdsByViews<IndexAdViewModel>()
             };
             return this.View(viewModel);
 

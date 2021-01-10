@@ -29,5 +29,7 @@
         public string Description { get; set; }
 
         public string MainPicture { get; set; }
+        
+        public int ViewCount { get; set; }
     }
 }

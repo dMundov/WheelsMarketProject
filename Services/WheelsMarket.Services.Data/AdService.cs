@@ -1,8 +1,4 @@
-﻿
-using System.Security.Cryptography.X509Certificates;
-using WheelsMarket.Web.ViewModels.HomeViewModels;
-
-namespace WheelsMarket.Services.Data
+﻿namespace WheelsMarket.Services.Data
 {
 
     using Mapping;
@@ -50,11 +46,24 @@ namespace WheelsMarket.Services.Data
             return ad.Id;
         }
 
+        public async Task DeleteAdAsync(string id)
+        {
+            Ad adToDelete = this.adRepository
+                .All()
+                .FirstOrDefault(x => x.Id == id);
+            if (adToDelete != null)
+            {
+                this.adRepository.Delete(adToDelete);
+                await this.adRepository.SaveChangesAsync();
+            }
+        }
+
         public T GetById<T>(string id)
         {
             T adToReturn = this.adRepository.All().Where(x => x.Id == id)
                 .To<T>().FirstOrDefault();
 
+            //increment ViewCounter +1
             var ad = this.adRepository
                 .All()
                 .FirstOrDefault(x => x.Id == id);
@@ -62,19 +71,29 @@ namespace WheelsMarket.Services.Data
             if (ad != null)
             {
                 ad.ViewCount += 1;
-               
-                this.adRepository.Update(ad); 
+
+                this.adRepository.Update(ad);
                 this.adRepository.SaveChangesAsync();
             }
+
             return adToReturn;
         }
 
 
-        public IEnumerable<T> GetLast10Ads<T>()
+        public IEnumerable<T> GetLatest10Ads<T>()
         {
             IQueryable<Ad> query = this.adRepository.All()
                 .OrderByDescending(x => x.CreatedOn)
                 .Take(10);
+
+            return query.To<T>()
+                .ToList();
+        }
+        public IEnumerable<T> TopFiveAdsByViews<T>()
+        {
+            IQueryable<Ad> query = this.adRepository.All()
+                .OrderByDescending(x => x.ViewCount)
+                .Take(5);
 
             return query.To<T>()
                 .ToList();
@@ -105,4 +124,5 @@ namespace WheelsMarket.Services.Data
         }
 
     }
+
 }

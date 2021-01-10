@@ -214,3 +214,9 @@ body {
     border-width: 1px;
     border-color: azure;
 }
+.single-line {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inherit;
+}

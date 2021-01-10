@@ -414,8 +414,8 @@
             <h2 class="block-title">
                 Нови Обяви
             </h2>
-            <div class="item-carousel" data-toggle="owlcarousel" data-owlcarousel-settings='{"items":6, "pagination":false, "navigation":true, "itemsScaleUp":true}'>
-                @foreach (var ad in Model.Ads)
+            <div class="item-carousel" data-toggle="owlcarousel" data-owlcarousel-settings='{"items":6, "pagination":true, "navigation":true, "itemsScaleUp":false}'>
+                @foreach (var ad in Model.LastTenAds)
                 {
 
                     <div class="item">
@@ -436,6 +436,25 @@
                         </div>
                     </div>
                 }
+            </div>
+            <br />
+            <h2 class="block-title">
+                Най-Преглеждани
+            </h2>
+            <div class=card-deck>
+                <div class="row">
+                    @foreach (var item in Model.TopFiveAdsByViews)
+                    {
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="@item.MainPicture" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Title</h5>
+                                <p class="single-line"> @item.Description</p>
+                                <a asp-controller="Ads" asp-action="Ad" class="btn btn-more"><i class="fa fa-plus"></i>Към обявата</a>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

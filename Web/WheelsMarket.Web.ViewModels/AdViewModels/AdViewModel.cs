@@ -33,9 +33,11 @@
         public string Description { get; set; }
 
         public decimal Price { get; set; }
-        
+
         public int ViewCount { get; set; }
 
         public string MainPicture { get; set; }
+
+        public string UserId { get; set; }
     }
 }
