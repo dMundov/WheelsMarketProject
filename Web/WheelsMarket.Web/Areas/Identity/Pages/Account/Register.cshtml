@@ -1,4 +1,5 @@
 ﻿@page
+@using WheelsMarket.Data.Models.Enums
 @model RegisterModel
 @{
     Layout = null;
@@ -16,27 +17,15 @@
     <meta charset="utf-8">
     <title>Register - Flexor Bootstrap Theme</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Facebook Opengraph integration: https://developers.facebook.com/docs/sharing/opengraph -->
-    <meta property="og:title" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:description" content="">
-
-
     <!-- Fav and touch icons -->
-    <link rel="shortcut icon" href="img/icons/favicon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900" rel="stylesheet">
-
     <!-- Bootstrap CSS File -->
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Libraries CSS Files -->
-    <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
     <link href="~/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
     <link href="~/lib/owlcarousel/owl.theme.min.css" rel="stylesheet">
     <link href="~/lib/owlcarousel/owl.transitions.min.css" rel="stylesheet">
@@ -53,17 +42,6 @@
 
         <!-- ======== Region: #content ======== -->
         <div id="content">
-            <div class="header">
-                <div class="header-inner">
-                    <!--navbar-branding/logo - hidden image tag & site name so things like Facebook to pick up, actual logo set via CSS for flexibility -->
-                    <a class="navbar-brand center-block" href="index.html" title="Home">
-                        <h1 class="hidden">
-                            <img src="img/logo.png" alt="Flexor Logo">
-                            Flexor
-                        </h1>
-                    </a>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                     <div class="panel panel-default">
@@ -77,26 +55,41 @@
                                 <fieldset>
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                            <input asp-for="Input.UserName" class="form-control" placeholder="Username">
+                                        </div>
+                                        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>
                                             <input asp-for="Input.Email" class="form-control" placeholder="Email">
                                         </div>
-                                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
-                                            <input asp-for="Input.Password"  class="form-control" placeholder="Password">
+                                            <input asp-for="Input.Password" class="form-control" placeholder="Password">
                                         </div>
-                                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group input-group-lg">
                                             <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
                                             <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
                                         </div>
-                                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                                     </div>
-
+                                    <div>
+                                        @foreach (GenderType genderType in Enum.GetValues(typeof(GenderType)))
+                                        {
+                                            <label>
+                                                <input asp-for="Input.Gender" type="radio" value="@genderType" />
+                                                @genderType.GetDisplayName()
+                                            </label>
+                                        }
+                                    </div>
                                     <div class="checkbox">
                                         <label>
                                             <input name="remember" type="checkbox" value="Terms">
@@ -121,26 +114,21 @@
                 </div>
             </div>
             <!-- /row -->
+            <div style="display: none;">
+                <partial name="_CookieConsentPartial" />
+            </div>
+            <div style="display: none;">
+                <partial name="_ValidationScriptsPartial" />
+            </div>
         </div>
     </div>
     <!-- Required JavaScript Libraries -->
     <script src="~/lib/jquery/jquery.min.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="~/lib/stellar/stellar.min.js"></script>
     <script src="~/lib/waypoints/waypoints.min.js"></script>
     <script src="~/lib/counterup/counterup.min.js"></script>
-    <script src="~/contactform/contactform.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-
-    <!-- Template Specisifc Custom Javascript File -->
-    <script src="~/js/custom.js"></script>
-
-    <!--Custom scripts demo background & colour switcher - OPTIONAL -->
-    <script src="~/js/color-switcher.js"></script>
-
-    <!--Contactform script -->
-    <script src="~/contactform/contactform.js"></script>
 
 </body>
 

@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using WheelsMarket.Data.Models
+@model WheelsMarket.Web.ViewModels.ProfileViewModels.ProfileViewModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    this.ViewData["Title"] = "Моят Профил";
+}
+
+<div class="container" id="tittles">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="@Model.ProfilePicturePath" class="user_image" />
+
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-xs-3">
+                    <label>Име</label>
+                    <p>@Model.FirstName</p>
+                </div>
+                <div class="col-xs-3">
+                    <label>Фамилия</label>
+                    <p>@Model.LastName</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3">
+                    <label>Пол</label>
+                    <p>@Model.Gender</p>
+                </div>
+                <div class="col-xs-3">
+                    <label>Ел.Поща</label>
+                    <p>@Model.Email</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="profileData" />
+</div>

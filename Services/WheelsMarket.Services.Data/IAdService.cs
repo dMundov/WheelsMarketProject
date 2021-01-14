@@ -1,14 +1,10 @@
-﻿using WheelsMarket.Web.ViewModels.AdViewModels;
-using WheelsMarket.Web.ViewModels.HomeViewModels;
-using WheelsMarket.Web.ViewModels.ProfileViewModels;
-using WheelsMarket.Web.ViewModels.SearchInputModels;
-
-namespace WheelsMarket.Services.Data
+﻿namespace WheelsMarket.Services.Data
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using WheelsMarket.Data.Models.Enums;
+    using Web.ViewModels.SearchInputModels;
 
     public interface IAdService
     {

@@ -1,6 +1,5 @@
 ﻿namespace WheelsMarket.Services.Data
 {
-
     using Mapping;
     using System.Collections.Generic;
     using System.Linq;
@@ -111,14 +110,23 @@
 
         public IEnumerable<T> SearchAds<T>(QuickSearchInputModel quickSearchInputModel)
         {
-            IQueryable<Ad> searchResult = adRepository
-                .All()
-                .Where(x => x.Diameter == quickSearchInputModel.Diameter)
-                .Where(x => x.BoltsNumber == quickSearchInputModel.BoltsNumber)
-                .Where(x => x.InterBoltDistance == quickSearchInputModel.InterBoltDistance)
-                .Where(x => x.Offset == quickSearchInputModel.Offset)
-                .Where(x => x.CenterBore == quickSearchInputModel.CenterBore)
-                .Where(x => x.Width == quickSearchInputModel.Width);
+            IQueryable<Ad> searchResult = null;
+
+            if (quickSearchInputModel == null)
+            {
+                 searchResult = adRepository.All();
+            }
+            else
+            {
+                searchResult = adRepository
+                   .All()
+                   .Where(x => x.Diameter == quickSearchInputModel.Diameter)
+                   .Where(x => x.BoltsNumber == quickSearchInputModel.BoltsNumber)
+                   .Where(x => x.InterBoltDistance == quickSearchInputModel.InterBoltDistance)
+                   .Where(x => x.Offset == quickSearchInputModel.Offset)
+                   .Where(x => x.CenterBore == quickSearchInputModel.CenterBore)
+                   .Where(x => x.Width == quickSearchInputModel.Width);
+            }
 
             return searchResult.To<T>().ToList();
         }

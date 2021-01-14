@@ -220,3 +220,22 @@ body {
     overflow: hidden;
     display: inherit;
 }
+.user_avatar {
+    vertical-align:middle;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.user_image {
+    width: 200px;
+    height: 200px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #cccccc
+}
+#tittles {
+    color: antiquewhite;
+}
+hr.profileData {
+    border: 1px solid antiquewhite;
+}

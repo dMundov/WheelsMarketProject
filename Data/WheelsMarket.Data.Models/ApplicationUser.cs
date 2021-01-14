@@ -1,4 +1,7 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
+
+using WheelsMarket.Data.Models.Enums;
+
 namespace WheelsMarket.Data.Models
 {
     using System;
@@ -28,6 +31,14 @@ namespace WheelsMarket.Data.Models
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public GenderType Gender { get; set; }
+
+        public string ProfilePicturePath { get; set; }
 
         public virtual ICollection<IdentityUserRole<string>> Roles { get; set; }
 

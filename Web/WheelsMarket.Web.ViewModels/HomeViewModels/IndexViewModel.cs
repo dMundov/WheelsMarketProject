@@ -1,8 +1,10 @@
-﻿namespace WheelsMarket.Web.ViewModels.HomeViewModels
+﻿using WheelsMarket.Web.ViewModels.ProfileViewModels;
+
+namespace WheelsMarket.Web.ViewModels.HomeViewModels
 {
     using System.Collections.Generic;
 
-    public class IndexViewModel  
+    public class IndexViewModel 
     {
         public short BoltsNumber { get; set; }
 
@@ -20,8 +22,10 @@
 
         public IEnumerable<IndexAdViewModel> TopFiveAdsByViews { get; set; }
 
+        public string ProfilePicPath { get; set; }   
+
     }
-    
+
 }
 
 

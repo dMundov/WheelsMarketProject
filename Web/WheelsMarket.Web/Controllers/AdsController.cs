@@ -99,6 +99,7 @@ namespace WheelsMarket.Web.Controllers
                 , input.Price
                 , input.Description
                 , user.Id);
+
             this.TempData["InfoMessage"] = "Ad has created!";
             return this.RedirectToAction(nameof(this.Ad), new { id = adId });
 

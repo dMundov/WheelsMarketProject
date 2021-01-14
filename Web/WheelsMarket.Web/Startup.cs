@@ -1,4 +1,5 @@
 ﻿using CloudinaryDotNet;
+using Microsoft.AspNetCore.Identity;
 using WheelsMarket.Services;
 
 namespace WheelsMarket.Web
@@ -48,11 +49,26 @@ namespace WheelsMarket.Web
                         options.CheckConsentNeeded = context => true;
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default User settings.
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+
+            });
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequiredLength = 7;
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
             
-            //the property names are to remain unchanged
+            //the property names  remain unchanged
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -80,8 +96,9 @@ namespace WheelsMarket.Web
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IAdService, AdService>();
             services.AddTransient<ICommentService, CommentService>();
-            
-            
+            services.AddTransient<IProfileService, ProfileService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Web.Areas.Identity.Pages.Account
+﻿using WheelsMarket.Data.Models.Enums;
+
+namespace WheelsMarket.Web.Areas.Identity.Pages.Account
 {
     using System;
     using System.Collections.Generic;
@@ -50,19 +52,29 @@
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Ел.Поща")]
             public string Email { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Парола")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Потвърди парола")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+            
+            [Required]
+            [Display(Name = "Потребителско Име")]
+            public string UserName { get; set; }
+            
+            [Required]
+            [Display(Name = "Пол")]
+            public GenderType Gender { get; set; }
+
+            public string ProfilePicPath { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -77,7 +89,23 @@
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = Input.UserName, 
+                    Email = Input.Email,
+                    Gender = Input.Gender,
+                    ProfilePicturePath = Input.ProfilePicPath
+                };
+
+                if (user.Gender == GenderType.Female)
+                {
+                    user.ProfilePicturePath = @"\" + @"images" + @"\" + "default_female_user.png";
+                }
+                else
+                {
+                    user.ProfilePicturePath = @"\" + @"images" + @"\" + "default_male_user.png";
+                }
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

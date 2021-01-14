@@ -55,7 +55,7 @@
     },
     {
       "provider": "unpkg",
-      "library": "@fortawesome/fontawesome-free@5.13.0",
+      "library": "@fortawesome/fontawesome-free@5.15.1",
       "destination": "wwwroot/lib/fontawesome/",
       "files": [
         "webfonts/fa-brands-400.eot",
