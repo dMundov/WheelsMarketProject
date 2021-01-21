@@ -1,4 +1,9 @@
-﻿namespace WheelsMarket.Services.Data
+﻿using System;
+using System.Linq;
+using WheelsMarket.Data.Models;
+using WheelsMarket.Web.ViewModels.AdViewModels;
+
+namespace WheelsMarket.Services.Data
 {
     using Mapping;
     using System.Collections.Generic;
@@ -59,25 +64,27 @@
 
         public T GetById<T>(string id)
         {
-            T adToReturn = this.adRepository.All().Where(x => x.Id == id)
-                .To<T>().FirstOrDefault();
+            T adToReturn = this.adRepository.All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
 
-            //increment ViewCounter +1
-            var ad = this.adRepository
-                .All()
-                .FirstOrDefault(x => x.Id == id);
+            return adToReturn;
+        }
+
+        public async Task IncrementViewCounter(string id)
+        {
+            var ad = this.adRepository.All()
+                .Single(x=>x.Id==id);
 
             if (ad != null)
             {
                 ad.ViewCount += 1;
 
                 this.adRepository.Update(ad);
-                this.adRepository.SaveChangesAsync();
+                await this.adRepository.SaveChangesAsync();
             }
-
-            return adToReturn;
         }
-
 
         public IEnumerable<T> GetLatest10Ads<T>()
         {
@@ -112,9 +119,13 @@
         {
             IQueryable<Ad> searchResult = null;
 
-            if (quickSearchInputModel == null)
+            if (quickSearchInputModel.Diameter == null
+                && quickSearchInputModel.BoltsNumber == null
+                && quickSearchInputModel.InterBoltDistance == null
+                && quickSearchInputModel.CenterBore == null
+                && quickSearchInputModel.Width == null)
             {
-                 searchResult = adRepository.All();
+                searchResult = adRepository.All();
             }
             else
             {

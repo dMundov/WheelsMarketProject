@@ -31,4 +31,5 @@ function GetConfirmation() {
         return false;
     }
 }
+$('#exampleModalCenter').modal('show');
  

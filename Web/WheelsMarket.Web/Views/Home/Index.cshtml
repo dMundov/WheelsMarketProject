@@ -11,7 +11,7 @@
                     <div class="col-xs-2">
                         <label>Диаметър</label>
                         <select class="form-control" id="diameter" asp-for="Diameter">
-                            <option selected="">Избери</option>
+                            <option>Избери</option>
                             <option value="8">8</option>
                             <option value="13">13"</option>
                             <option value="14">14"</option>
@@ -29,7 +29,7 @@
                     <div class="col-xs-2">
                         <label>Болтове бр.</label>
                         <select class="form-control" id="boltsCount" asp-for="BoltsNumber">
-                            <option selected="">Избери</option>
+                            <option>Избери</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
@@ -39,7 +39,7 @@
                     <div class="col-xs-2">
                         <label>Междуболт.Разстяние</label>
                         <select class="form-control" asp-for="InterBoltDistance">
-                            <option value="">Избери</option>
+                            <option>Избери</option>
                             <option value="98">98</option>
                             <option value="100">100</option>
                             <option value="105">105</option>
@@ -73,7 +73,7 @@
                     <div class="col-xs-2">
                         <label>Офсет(ET)</label>
                         <select class="form-control" id="ofset(ET)" asp-for="Offset">
-                            <option value="">Избери</option>
+                            <option value="" selected disabled hidden>Избери</option>
                             <option value="-35">-35</option>
                             <option value="-32">-32</option>
                             <option value="-30">-30</option>
@@ -223,8 +223,8 @@
                     <div class="col-xs-2">
                         <label>Центр. Отвор</label>
                         <select class="form-control" id="centralOpening" asp-for="CenterBore">
-                            <option value="" selected="selected">Избери</option>
-                            <option value=">54">54</option>
+                            <option>Избери</option>
+                            <option value="54">54</option>
                             <option value="54.1">54.1</option>
                             <option value="56.1">56.1</option>
                             <option value="56.5">56.5</option>
@@ -324,7 +324,7 @@
                     <div class="col-xs-2">
                         <label>Ширина</label>
                         <select select class="form-control" id="width" asp-for="Width">
-                            <option value="">Избери</option>
+                            <option>Избери</option>
                             <option value="2.5">2.5</option>
                             <option value="3.5">3.5</option>
                             <option value="4">4</option>
@@ -701,9 +701,6 @@
 
 <!-- Template Specisifc Custom Javascript File -->
 <script src="js/custom.js"></script>
-
-<!--Custom scripts demo background & colour switcher - OPTIONAL -->
-<script src="js/color-switcher.js"></script>
 
 <!--Contactform script -->
 <script src="contactform/contactform.js"></script>

@@ -37,7 +37,7 @@ namespace WheelsMarket.Web.Controllers
         }
 
 
-        public IActionResult Ad(string id)
+        public async Task<IActionResult> Ad(string id)
         {
 
             AdViewModel adViewModel = this.adService.GetById<AdViewModel>(id);
@@ -46,6 +46,7 @@ namespace WheelsMarket.Web.Controllers
                 return this.NotFound();
             }
 
+            await this.adService.IncrementViewCounter(id);
             return this.View(adViewModel);
         }
 

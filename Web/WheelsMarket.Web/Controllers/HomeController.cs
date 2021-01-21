@@ -66,7 +66,7 @@ namespace WheelsMarket.Web.Controllers
 
 
 
-        public IActionResult Privacy()
+        public IActionResult WheelSize()
         {
             return this.View();
         }

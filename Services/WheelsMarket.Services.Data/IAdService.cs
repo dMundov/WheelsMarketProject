@@ -1,4 +1,6 @@
-﻿namespace WheelsMarket.Services.Data
+﻿using WheelsMarket.Web.ViewModels.AdViewModels;
+
+namespace WheelsMarket.Services.Data
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -13,6 +15,8 @@
         Task DeleteAdAsync(string id);
 
         T GetById<T>(string id);
+        
+        Task IncrementViewCounter(string Id);
 
         IEnumerable<T> GetLatest10Ads<T>();
         

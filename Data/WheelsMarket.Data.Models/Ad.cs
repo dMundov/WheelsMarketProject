@@ -10,11 +10,6 @@ namespace WheelsMarket.Data.Models
 
     public class Ad : BaseDeletableModel<string>
     {
-        public Ad()
-        {
-            this.Id = Guid.NewGuid().ToString();
-            IsApproved = false;
-        }
 
         [Required]
         public string Title { get; set; }
