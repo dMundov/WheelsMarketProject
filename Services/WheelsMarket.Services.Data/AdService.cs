@@ -50,6 +50,39 @@ namespace WheelsMarket.Services.Data
             return ad.Id;
         }
 
+        public async Task<string> Edit(CreateAdInputModel inputAdViewModel)
+        {
+            Ad adToUpdate = this.adRepository.All()
+                .FirstOrDefault(x => x.Id == inputAdViewModel.Id);
+            
+            if (inputAdViewModel.MainPicture == null)
+            {
+                inputAdViewModel.MainPicture = adToUpdate.MainPicture;
+            }
+
+            if (adToUpdate != null)
+            {
+                adToUpdate.BoltsNumber = inputAdViewModel.BoltsNumber;
+                adToUpdate.CenterBore = inputAdViewModel.CenterBore;
+                adToUpdate.Description = inputAdViewModel.Description;
+                adToUpdate.Diameter = inputAdViewModel.Diameter;
+                adToUpdate.MainPicture = inputAdViewModel.MainPicture;
+                adToUpdate.InterBoltDistance = inputAdViewModel.InterBoltDistance;
+                adToUpdate.Price = inputAdViewModel.Price;
+                adToUpdate.RimType = inputAdViewModel.RimType;
+                adToUpdate.Offset = inputAdViewModel.Offset;
+                adToUpdate.Width = inputAdViewModel.Width;
+                adToUpdate.Count = inputAdViewModel.Count;
+                
+                this.adRepository.Update(adToUpdate);
+                await this.adRepository.SaveChangesAsync();
+                return adToUpdate.Id;
+            }
+
+            return inputAdViewModel.Id;
+        }
+
+
         public async Task DeleteAdAsync(string id)
         {
             Ad adToDelete = this.adRepository
@@ -62,7 +95,7 @@ namespace WheelsMarket.Services.Data
             }
         }
 
-        public T GetById<T>(string id)
+        public T GetAdById<T>(string id)
         {
             T adToReturn = this.adRepository.All()
                 .Where(x => x.Id == id)
@@ -75,7 +108,7 @@ namespace WheelsMarket.Services.Data
         public async Task IncrementViewCounter(string id)
         {
             var ad = this.adRepository.All()
-                .Single(x=>x.Id==id);
+                .Single(x => x.Id == id);
 
             if (ad != null)
             {
@@ -114,6 +147,8 @@ namespace WheelsMarket.Services.Data
             return adsList.To<T>()
                   .ToList();
         }
+
+
 
         public IEnumerable<T> SearchAds<T>(QuickSearchInputModel quickSearchInputModel)
         {

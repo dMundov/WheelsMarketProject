@@ -6,8 +6,10 @@
     using Data.Models.Enums;
     using Services.Mapping;
 
-    public class CreateAdInputModel : IMapTo<Ad>
+    public class CreateAdInputModel : IMapTo<Ad>,IMapFrom<Ad>
     {
+        [Required] 
+        public string Id { get; set; }
 
         [Required]
         public short BoltsNumber { get; set; }
@@ -37,6 +39,8 @@
         public string Description { get; set; }
 
         public string MainPicture { get; set; }
+
+        public int Count { get; set; }
 
     }
 }

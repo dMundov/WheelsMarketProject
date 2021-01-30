@@ -40,6 +40,8 @@ namespace WheelsMarket.Data.Models
 
         public string MainPicture { get; set; }
 
+        public int Count { get; set; }
+
         [Required]
         public decimal Price { get; set; }
 

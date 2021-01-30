@@ -22,7 +22,7 @@
                             <a asp-controller="Ads" asp-action="Ad" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Details</a>
                             @if (item.UserId == UserManager.GetUserId(User))
                             {
-                                <a asp-action="" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
+                                <a asp-controller="Ads"asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Edit</a>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteAd">
                                     Изтрий
