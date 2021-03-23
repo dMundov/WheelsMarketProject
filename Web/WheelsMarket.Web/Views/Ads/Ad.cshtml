@@ -93,7 +93,9 @@
                     <br />
                 </div>
                 <div class="comments-list">
-                    <div class="media" v-for="com in comments">
+                    <div class="media" v-for="com in comments" 
+                         :key="com.Id"
+                         :comment="com">
                         <div class="panel-body">
                             <ul class="list-group">
                                 <li class="list-group-item">
@@ -108,12 +110,30 @@
                                                 {{com.Body}}
                                             </div>
                                             <div class="action">
-                                                <button type="button" class="btn btn-primary btn-xs" title="Edit">
+                                                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#exampleModal" title="Edit">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-success btn-xs" title="Approved">
-                                                    <span class="glyphicon glyphicon-ok"></span>
-                                                </button>
+                                                <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">{{com.UserName}}</h5>
+                                                                <p class="modal-title" id="comId" v-model="commentToEdit.Id">{{com.Id}}<p>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+                                                                    <span aria-hidden="true">&times;</span>
+                                                            </div>
+                                                            <form onsubmit="return false;">
+                                                                <div class="modal-body">
+                                                                    <textarea class="form-control" v-model="commentToEdit.Body"></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button class="btn btn-primary" v-on:click="update_comment()">Save changes</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
                                                 <button type="button" class="btn btn-danger btn-xs" title="Delete">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </button>
@@ -134,17 +154,21 @@
             <br />
             <p>Напиши коментар</p>
             <form onsubmit="return false;">
-                <textarea rows="3" placeholder="Your Comment" id="Body" v-model="comment.Body" class="form-control"></textarea>
+                <textarea rows="3" placeholder="Напиши коментар" id="Body" v-model="comment.Body" class="form-control"></textarea>
                 <button class="btn btn-success" v-on:click="submit_comment()">Запиши</button>
             </form>
         </div>
     }
 </div>
 <!-- comments engine-->
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}
 <script>
-    var pusher = new Pusher('66ba1be85188c9d95935', {
-        cluster: 'eu'
-    });
+    var pusher = new Pusher('66ba1be85188c9d95935',
+        {
+            cluster: 'eu'
+        });
     var my_channel = pusher.subscribe('asp_channel');
     var app = new Vue({
         el: '#app',
@@ -153,7 +177,13 @@
             comment: {
                 Body: '',
                 AdId: '@Model.Id'
+            },
+            commentToEdit: {
+                Id: '',
+                Body: '',
+                AdId: '@Model.Id'
             }
+
         },
         created: function() {
             this.get_comments();
@@ -163,14 +193,11 @@
             get_comments: function() {
                 window.axios.get(
                         '@Url.Action("GetAllComments", "Comment", new {id = @Model.Id}, protocol: "https")')
-
                     .then((response) => {
                         this.comments = response.data;
                     });
-
             },
-
-            listen: function () {
+            listen: function() {
                 my_channel.bind("asp_event",
                     (data) => {
                         if (data.AdId === this.comment.AdId) {
@@ -178,10 +205,22 @@
                         }
                     });
             },
-            submit_comment: function () {
+            submit_comment: function() {
                 window.axios.post('@Url.Action("AddComment", "Comment", new {}, protocol: "https")', this.comment)
                     .then((response) => {
                         this.comment.Body = '';
+                        alert("Вашият коментар е записан!");
+                    });
+            },
+            update_comment:function ($event) {
+                var index = this.comments.findIndex((element) => {
+                    return element.id === $event.id;
+                });
+
+                window.axios.post('@Url.Action("Edit", "Comment", new {}, protocol: "https")')
+                    .then((response) => {
+                        this.commentToEdit.Body = '';
+                        this.commentToEdit.Id = index;
                         alert("Вашият коментар е записан!");
                     });
             }

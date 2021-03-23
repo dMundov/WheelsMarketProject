@@ -54,6 +54,36 @@ namespace WheelsMarket.Services.Data
             };
             return commentToPush;
         }
+
+        public async Task<CommentOutPutViewModel> Edit(CommentInputModel commentData)
+        {
+            int inputCommentId = int.Parse(commentData.Id);
+
+            Comment commentToUpdate = this.commentRepository.All()
+                 .FirstOrDefault(x => x.Id == inputCommentId);
+            var commentToReturn = new CommentOutPutViewModel();
+            if (commentToUpdate != null)
+            {
+                commentToUpdate.UserName = commentData.UserName;
+                commentToUpdate.Body = commentData.Body;
+                commentToUpdate.AdId = commentData.AdId;
+
+                commentToReturn = new CommentOutPutViewModel
+                {
+                    UserName = commentToUpdate.UserName,
+                    AdId = commentToUpdate.AdId,
+                    Body = commentToUpdate.Body,
+                    CreatedOn = commentToUpdate.CreatedOn.ToString()
+                };
+            }
+
+            this.commentRepository.Update(commentToUpdate);
+            await this.commentRepository.SaveChangesAsync();
+
+
+            return commentToReturn;
+
+        }
     }
 
 }

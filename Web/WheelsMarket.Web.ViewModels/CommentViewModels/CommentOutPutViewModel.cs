@@ -6,8 +6,10 @@ namespace WheelsMarket.Web.ViewModels.CommentViewModels
     using Services.Mapping;
     using Data.Models;
 
-    public class CommentOutPutViewModel : IMapFrom<Comment>
+    public class CommentOutPutViewModel : IMapFrom<Comment>,IMapTo<Comment>
     {
+         public int Id { get; set; }
+
         public string AdId { get; set; }
 
         public string UserName { get; set; }

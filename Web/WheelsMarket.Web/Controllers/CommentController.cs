@@ -56,6 +56,28 @@ namespace WheelsMarket.Web.Controllers
             return  Content("CommentAddSuccessfully");
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromBody]CommentInputModel inputCommentData)
+        {
+            ApplicationUser user = await this.userManager.GetUserAsync(this.User);
+
+            inputCommentData.UserName = user.UserName;
+            inputCommentData.UserId = user.Id;
+            
+            var commentToPush = await this.commentService.Edit(inputCommentData);
+
+            var options = new PusherOptions
+            {
+                Cluster = "eu"
+            };
+
+            var pusher = new Pusher("1115013", "66ba1be85188c9d95935", "8e7bb1ac169466d0f4b9", options);
+            ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", commentToPush);
+
+            return Content("CommentEditSuccessfully");
+        }
+
     }
 }
 

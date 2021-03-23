@@ -11,7 +11,9 @@ namespace WheelsMarket.Services.Data
     {
 
         Task<CommentOutPutViewModel> CreateNewComment(CommentInputModel data);
-        
+
+        Task<CommentOutPutViewModel> Edit(CommentInputModel commentData);
+
         IEnumerable<T> CommentsForCurrentAd<T> (string id);
 
     }
