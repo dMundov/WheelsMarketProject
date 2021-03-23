@@ -79,7 +79,7 @@
         @if (Model.UserId == UserManager.GetUserId(User))
         {
             <a asp-controller="Ads" asp-action="Delete" asp-route-Id="@Model.Id" class="btn btn-danger btn-sm" onclick="return GetConfirmation()">Delete</a>
-            <a asp-controller="Ads" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit </a>
+            <a asp-controller="Ads" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Edit</a>
         }
     </div>
 </div>
